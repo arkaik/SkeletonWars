@@ -35,6 +35,8 @@ public class TurnManagerScript : MonoBehaviour {
 		}
 	}
 
+
+
 	void changeTeam (int newTeam) {
 		actualPlayer = newTeam;
 		actualTeam = charList [actualPlayer];
