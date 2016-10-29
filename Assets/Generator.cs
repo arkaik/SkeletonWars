@@ -6,9 +6,11 @@ public class Generator : MonoBehaviour {
 	public GameObject tmanager;
 	public GameObject mcreator;
 	public GameObject ucreator;
+	public GameObject imanager;
 	TurnManagerScript tScript;
 	MapCreation mScript;
 	UnitCreator uScript;
+	InputManagerScript iScript; 
 
 	// Use this for initialization
 	void Start () {
@@ -18,9 +20,11 @@ public class Generator : MonoBehaviour {
 		GameObject turnMan = Instantiate (tmanager);
 		GameObject mapCreator = Instantiate (mcreator);
 		GameObject unitCreator = Instantiate (ucreator);
+		GameObject inputMan = Instantiate (imanager);
 		tScript = turnMan.GetComponent<TurnManagerScript> ();
 		mScript = mapCreator.GetComponent<MapCreation> ();
 		uScript = unitCreator.GetComponent<UnitCreator> ();
+		iScript = inputMan.GetComponent<InputManagerScript> ();
 		uScript.mapSize = new Vector2 (20, 40);
 
 		int[,] map = new int [x, y];
@@ -40,6 +44,7 @@ public class Generator : MonoBehaviour {
 		uScript.tutorialUnits ();
 		turnMan.GetComponent<TurnManagerScript> ().unitMap = uScript.getUnitMap ();
 		turnMan.GetComponent<TurnManagerScript> ().unitList = uScript.getUnitLists ();
+		inputMan.GetComponent<InputManagerScript> ().setTurnMan(tScript);
 	}
 
 	// Update is called once per frame

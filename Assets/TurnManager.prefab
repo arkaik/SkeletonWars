@@ -56,6 +56,9 @@ MonoBehaviour:
   iaNum: 0
   inTurn: 1
   terrain: 
-  charMap: []
   mapSize: {x: 0, y: 0}
   cursor: {fileID: 1000012666769054, guid: 5fe675c564d71cc44945f6ca7e09e827, type: 2}
+  image_move: {fileID: 114000013716489878, guid: d80ae4a7a1bea5d48b549fbf1ef3f3f5,
+    type: 2}
+  image_attack: {fileID: 114000012902201940, guid: 8b74ce38e76531b42a1b0af65416b73a,
+    type: 2}
