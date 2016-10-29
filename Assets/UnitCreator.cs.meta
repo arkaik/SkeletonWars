@@ -1,10 +1,20 @@
 fileFormatVersion: 2
 guid: 13406b49a56381848a308c08e10f47dc
-timeCreated: 1477694839
+timeCreated: 1477746907
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - lichObject: {fileID: 100094, guid: 8b79114391319fb4bb56f64adb410eff, type: 2}
+  - skeletonNone: {fileID: 137098, guid: c7e8a5bb79537a441836a1e2ea02a005, type: 2}
+  - skeletonCyan: {fileID: 1000010498988072, guid: 375da41ce925bd546a34e406f609940f,
+      type: 2}
+  - skeletonPurple: {fileID: 1000013814300192, guid: 4a967e9e95914194f9e81682db6faa8d,
+      type: 2}
+  - skeletonPuke: {fileID: 1000012859847482, guid: 626c21f3dab5f254f87b4318c94f3a1f,
+      type: 2}
+  - skeletonRed: {fileID: 1000011928221278, guid: c140ab0aafcd6364ca9ce9132e4f837a,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
