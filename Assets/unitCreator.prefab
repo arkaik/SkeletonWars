@@ -52,5 +52,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lichObject: {fileID: 1000013980076266, guid: 055ce9e83be0bd140a3e7aa52d871817, type: 2}
-  skeletonObject: {fileID: 0}
+  skeletonObject: {fileID: 137098, guid: c7e8a5bb79537a441836a1e2ea02a005, type: 2}
   units: []

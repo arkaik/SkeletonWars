@@ -34,6 +34,7 @@ public class Generator : MonoBehaviour {
 		map [10, 20] = -1;
 		mScript.setMatrix (map,x,y);
 
+		turnMan.GetComponent<TurnManagerScript> ().charMap = uScript.tutorialUnits ();
 	}
 
 	// Update is called once per frame
