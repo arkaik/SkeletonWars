@@ -27,12 +27,12 @@ public class UnitCreator : MonoBehaviour {
 	
 	}
 
-	void createUnit(int posX, int posY, Vector3 posVec3, UnitBehaviour.Team team, UnitType type = UnitType.Skeleton) {
+	void createUnit(int posX, int posZ, Vector3 posVec3, UnitBehaviour.Team team, UnitType type = UnitType.Skeleton) {
 		GameObject lich;
 
 		if (type == UnitType.Lich) {
 			lich = Instantiate (lichObject, posVec3, Quaternion.identity);
-			lich.GetComponent<UnitBehaviour> ().SetupStats (posX, posY, 3, 3, 100, 0, 0, 0);
+			lich.GetComponent<UnitBehaviour> ().SetupStats (posX, posZ, 3, 3, 100, 0, 0, 0);
 			lich.GetComponent<UnitBehaviour> ().SetupBaseAttack (4, 2, 3);
 
 			if (team == UnitBehaviour.Team.Player)
