@@ -64,8 +64,19 @@ public class UnitBehaviour : MonoBehaviour {
 		attackElem = e;
 	}
 
-	bool attack() {
+	bool attackHit() {
 		return (Random.Range (0, 100) < precision);
+	}
+
+	bool criticalHit() {
+		return (Random.Range (0, 100) < critChance);
+	}
+
+	void receiveDamage(int damage) {
+		if (health <= damage)
+			Die ();
+		else
+			health -= damage;
 	}
 
 	// Use this for initialization
