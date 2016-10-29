@@ -123,8 +123,15 @@ public class InputManagerScript : MonoBehaviour {
 			} else if (Input.GetKeyUp (KeyCode.Space) && actionOption > -1) {
 				actionSelected = true;
 				unitSelected = false;
+				showActions = false;
+				DestroyObject (i1);
+				DestroyObject (i2);
 			}
 
+		}
+
+		if (actionSelected) {
+			
 		}
 
 	}
