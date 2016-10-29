@@ -30,6 +30,7 @@ public class TurnManagerScript : MonoBehaviour {
 		actualNumChars = 1;//charList [actualPlayer].Count;
 		// Characters that have finished its actions
 		actualNumFinishedChars = 0;
+
 	}
 	
 	// Update is called once per frame

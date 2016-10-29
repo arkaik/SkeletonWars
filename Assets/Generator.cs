@@ -3,9 +3,9 @@ using System.Collections;
 
 public class Generator : MonoBehaviour {
 
-	GameObject tmanager;
-	GameObject mcreator;
-	GameObject ucreator;
+	public GameObject tmanager;
+	public GameObject mcreator;
+	public GameObject ucreator;
 	TurnManagerScript tScript;
 	MapCreation mScript;
 	UnitCreator uScript;

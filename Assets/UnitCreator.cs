@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class UnitCreator : MonoBehaviour {
 
 	public GameObject lichObject;
-	public UnitBehaviour playerLich;
 	public GameObject skeletonObject;
 	public List<GameObject> units;
 
@@ -36,7 +35,7 @@ public class UnitCreator : MonoBehaviour {
 			lich.GetComponent<UnitBehaviour> ().SetupBaseAttack (4, 2, 3);
 
 			if (team == UnitBehaviour.Team.Player)
-				playerLich = lich.GetComponent<UnitBehaviour> ();
+				script = lich.GetComponent<UnitBehaviour> ();
 		} else if (type == UnitType.Skeleton) {
 			GameObject skeleton;
 			skeleton = Instantiate (skeletonObject, posVec3, Quaternion.identity) as GameObject;
