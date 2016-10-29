@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -10,8 +11,13 @@ public class TurnManagerScript : MonoBehaviour {
 	public bool inTurn = true;
 	public List<List<GameObject> > charList;
 
+	public ArrayList<int> terrain;
+	public ArrayList<int> charMap;
+	public Vector2 mapSize;
+
 	private int actualPlayer;
-	private List<GameObject> actualTeam;
+	private int actualNumChars;
+	private int actualNumFinishedChars;
 	private int actualChar;
 
 	// Use this for initialization
@@ -19,27 +25,34 @@ public class TurnManagerScript : MonoBehaviour {
 		//Estamos en turno
 		inTurn = true;
 		actualPlayer = 0;
-		actualTeam = charList [actualPlayer];
+		actualNumChars = charList [actualPlayer].Count;
+		// Characters that have finished its actions
+		actualNumFinishedChars = 0;
 		actualChar = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		if (actualTeam [actualChar].hasActioned ()) {
-			actualChar += 1;
-		}
+		if (Input.GetKeyUp (KeyCode.Space)) {
 			
-		if (actualChar == actualTeam.Count) {
+		}
+
+		if (actualNumFinishedChars == actualNumChars) {
 			changeTeam ((actualPlayer + 1) % playerNum);
 		}
 	}
 
+	// Attack position (i,j) -> row i, column j
+	void attack(int i, int j) {
+		GameObject c = charMap [i * mapSize.x + j];
 
+	} 
 
 	void changeTeam (int newTeam) {
 		actualPlayer = newTeam;
-		actualTeam = charList [actualPlayer];
+		actualNumChars = charList [actualPlayer].Count;
+		actualNumFinishedChars = 0;
 		actualChar = 0;
 	}
 
