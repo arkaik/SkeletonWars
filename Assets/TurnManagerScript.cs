@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class TurnManagerScript : MonoBehaviour {
 
@@ -20,6 +21,8 @@ public class TurnManagerScript : MonoBehaviour {
 	private int actualNumFinishedChars;
 
 	public GameObject cursor;
+	public Image image_move;
+	public Image image_attack;
 
 	private float accTime;
 	private float timeStep;
@@ -30,6 +33,8 @@ public class TurnManagerScript : MonoBehaviour {
 
 	private bool unitSelected;
 	private bool showActions;
+	private Image i1;
+	private Image i2;
 
 	// Use this for initialization
 	void Start () {
@@ -95,7 +100,13 @@ public class TurnManagerScript : MonoBehaviour {
 				timeExp = 0.0f;
 			}
 		} else if (showActions) {
-			
+			if (Input.GetKey (KeyCode.Escape)) {
+				showActions = false;
+				unitSelected = false;
+				DestroyObject (i1);
+				DestroyObject (i2);
+			}
+
 		}
 
 
@@ -108,6 +119,11 @@ public class TurnManagerScript : MonoBehaviour {
 			if (c != null) {
 				unitSelected = true;
 				showActions = true;
+				GameObject canv =  GameObject.Find ("Canvas");
+				i1 = Instantiate (image_move);
+				i1.transform.SetParent (canv.transform, false);
+				i2 = Instantiate (image_attack);
+				i2.transform.SetParent (canv.transform, false);
 			}
 
 			//Obtener GameObject de la matriz luego extraer sus funciones
@@ -141,11 +157,11 @@ public class TurnManagerScript : MonoBehaviour {
 		actualNumFinishedChars = 0;
 	}
 
-	void OnGUI(){
+	/*void OnGUI(){
 		if (showActions) {
 			GUI.Box (new Rect(0, 0, 100, 100), "Move");
 			GUI.Box (new Rect(100, 0, 100, 100), "Attack");
 		}
-	}
+	}*/
 }
 
