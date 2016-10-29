@@ -51,3 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13406b49a56381848a308c08e10f47dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lichObject: {fileID: 1000013980076266, guid: 055ce9e83be0bd140a3e7aa52d871817, type: 2}
+  skeletonObject: {fileID: 0}
+  units: []

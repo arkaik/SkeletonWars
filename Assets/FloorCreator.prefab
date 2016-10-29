@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011966173314}
-  - 114: {fileID: 114000011343072292}
+  - 114: {fileID: 114000011647515354}
   m_Layer: 0
   m_Name: FloorCreator
   m_TagString: Untagged
@@ -40,7 +40,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &114000011343072292
+--- !u!114 &114000011647515354
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -48,11 +48,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000013182272914}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b1e029f45d9d8349b5a1df7a70eebdd, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f9a0bb9550360146929761331442cb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   vs: 20
   hs: 40
   basic_floor: {fileID: 1000011495271182, guid: a6d57f8cc0baf3545873654c3ae25492,
     type: 2}
-  nhabitable_floor: {fileID: 0}
+  nhabitable_floor: {fileID: 1000013422381662, guid: f3b3de213fb3e0a4d9040dc4745e6303,
+    type: 2}

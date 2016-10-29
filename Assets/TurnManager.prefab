@@ -55,3 +55,7 @@ MonoBehaviour:
   playerNum: 2
   iaNum: 0
   inTurn: 1
+  terrain: 
+  charMap: []
+  mapSize: {x: 0, y: 0}
+  cursor: {fileID: 1000010503850698, guid: 5fe675c564d71cc44945f6ca7e09e827, type: 2}
