@@ -27,6 +27,10 @@ public class TurnManagerScript : MonoBehaviour {
 	private float timeExpStep;
 	private float timeExpLimit;
 
+
+	private bool unitSelected;
+	private bool showActions;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -37,14 +41,16 @@ public class TurnManagerScript : MonoBehaviour {
 		// Characters that have finished its actions
 		actualNumFinishedChars = 0;
 
-		timeStep = 0.4f;
+		timeStep = 0.2f;
 		timeExp = 0.0f;
-		timeExpStep = 0.04f;
-		timeExpLimit = 0.3f;
+		timeExpStep = 0.05f;
+		timeExpLimit = 0.15f;
 
 		cursor = Instantiate (cursor, new Vector3 (1.0f, 1.5f, 1.0f), Quaternion.identity) as GameObject;
 		cursor.transform.Rotate (new Vector3(90, 0, 0));
 
+		unitSelected = false;
+		showActions = false;
 	}
 	
 	// Update is called once per frame
@@ -84,8 +90,16 @@ public class TurnManagerScript : MonoBehaviour {
 			timeExp = 0.0f;
 		}
 
-		if (Input.GetKeyUp (KeyCode.Space)) {
-			Vector2 tilePosition = cursor.transform.position;
+		if (Input.GetKeyUp (KeyCode.Space) && !unitSelected) {
+			Vector3 tilePosition = cursor.transform.position;
+			int cpos = (int)tilePosition.z * (int)mapSize.x + (int)tilePosition.x;
+			GameObject c = charMap [cpos];
+			//UnitBehaviour ub = c.GetComponent<UnitBehaviour> ();
+			if (c != null) {
+				unitSelected = true;
+				showActions = true;
+			}
+
 			//Obtener GameObject de la matriz luego extraer sus funciones
 			//Mostrar opciones y elegir una
 			//Ejecutar acción
@@ -117,5 +131,11 @@ public class TurnManagerScript : MonoBehaviour {
 		actualNumFinishedChars = 0;
 	}
 
+	void OnGUI(){
+		if (showActions) {
+			GUI.Box (new Rect(0, 0, 100, 100), "Move");
+			GUI.Box (new Rect(100, 0, 100, 100), "Attack");
+		}
+	}
 }
 

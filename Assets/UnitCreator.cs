@@ -37,7 +37,7 @@ public class UnitCreator : MonoBehaviour {
 			unit.transform.localScale = new Vector3 (unit.transform.lossyScale.y/unit.transform.lossyScale.y, 1, unit.transform.lossyScale.z/unit.transform.lossyScale.y);
 			unit.GetComponent<UnitBehaviour> ().SetupStats (posX, posZ, 3, 3, 100, 0, 0, 0);
 			unit.GetComponent<UnitBehaviour> ().SetupBaseAttack (4, 2, 3);
-			units.Insert(posX*(int)mapSize.x+posZ, unit);
+			units.Insert(posZ*(int)mapSize.x+posX, unit);
 
 			if (team == UnitBehaviour.Team.Player && playerLichScript == null )
 				playerLichScript = unit.GetComponent<UnitBehaviour> ();
@@ -46,7 +46,7 @@ public class UnitCreator : MonoBehaviour {
 			unit = Instantiate (skeletonObject, new Vector3(posX, 0f, posZ), Quaternion.identity) as GameObject;
 			unit.transform.localScale = new Vector3 (unit.transform.localScale.x*0.3f, unit.transform.localScale.y*0.3f, unit.transform.localScale.z*0.3f);
 			unit.GetComponent<UnitBehaviour> ().SetupStats (posX, posZ);
-			units.Insert(posX*(int)mapSize.x+posZ, unit);
+			units.Insert(posZ*(int)mapSize.x+posX, unit);
 
 
 			if (team == UnitBehaviour.Team.Enemy1) {
