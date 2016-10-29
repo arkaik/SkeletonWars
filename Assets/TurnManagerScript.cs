@@ -21,6 +21,12 @@ public class TurnManagerScript : MonoBehaviour {
 
 	public GameObject cursor;
 
+	private float accTime;
+	private float timeStep;
+	private float timeExp;
+	private float timeExpStep;
+	private float timeExpLimit;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -31,28 +37,53 @@ public class TurnManagerScript : MonoBehaviour {
 		// Characters that have finished its actions
 		actualNumFinishedChars = 0;
 
-		cursor = Instantiate (cursor, new Vector3 (1.0f, 1.0f, 1.0f), Quaternion.identity) as GameObject;
+		timeStep = 0.4f;
+		timeExp = 0.0f;
+		timeExpStep = 0.05f;
+		timeExpLimit = 0.3f;
+
+		cursor = Instantiate (cursor, new Vector3 (1.0f, 1.5f, 1.0f), Quaternion.identity) as GameObject;
+		cursor.transform.Rotate (new Vector3(90, 0, 0));
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKey (KeyCode.LeftArrow)) {
-			cursor.transform.Translate (-0.25f, 0, 0);
+		accTime += Time.deltaTime;
+
+		if (Input.GetKey (KeyCode.LeftArrow) && accTime > (timeStep-timeExp)) {
+			accTime -= (timeStep - timeExp);
+			if (timeExp < timeExpLimit) timeExp += timeExpStep;
+			cursor.transform.Translate (-1f, 0, 0);
+		} else if (Input.GetKeyUp (KeyCode.LeftArrow)) {
+			timeExp = 0.0f;
 		}
 
-		if (Input.GetKey (KeyCode.RightArrow)) {
-			cursor.transform.Translate (0.25f, 0, 0);
+		if (Input.GetKey (KeyCode.RightArrow) && accTime > (timeStep-timeExp)) {
+			accTime -= (timeStep - timeExp);
+			if (timeExp < timeExpLimit) timeExp += timeExpStep;
+			cursor.transform.Translate (1f, 0, 0);
+		} else if (Input.GetKeyUp (KeyCode.RightArrow)) {
+			timeExp = 0.0f;
 		}
 
-		if (Input.GetKey (KeyCode.UpArrow)) {
-			cursor.transform.Translate (0, 0, 0.25f);
+		if (Input.GetKey (KeyCode.UpArrow)  && accTime > (timeStep-timeExp)) {
+			accTime -= (timeStep - timeExp);
+			if (timeExp < timeExpLimit) timeExp += timeExpStep;
+			cursor.transform.Translate (0, 1f, 0);
+		} else if (Input.GetKeyUp (KeyCode.UpArrow)) {
+			timeExp = 0.0f;
 		}
 
-		if (Input.GetKey (KeyCode.DownArrow)) {
-			cursor.transform.Translate (0, 0, -0.25f);
+		if (Input.GetKey (KeyCode.DownArrow)  && accTime > (timeStep-timeExp)) {
+			accTime -= (timeStep - timeExp);
+			if (timeExp < timeExpLimit) timeExp += timeExpStep;
+			cursor.transform.Translate (0, -1f, 0);
+		} else if (Input.GetKeyUp (KeyCode.DownArrow)) {
+			timeExp = 0.0f;
 		}
+
 
 		if (actualNumFinishedChars == actualNumChars) {
 			changeTeam ((actualPlayer + 1) % playerNum);
