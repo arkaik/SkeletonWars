@@ -51,6 +51,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13406b49a56381848a308c08e10f47dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lichObject: {fileID: 1000013980076266, guid: 055ce9e83be0bd140a3e7aa52d871817, type: 2}
-  skeletonObject: {fileID: 137098, guid: c7e8a5bb79537a441836a1e2ea02a005, type: 2}
-  units: []
+  lichObject: {fileID: 100094, guid: 8b79114391319fb4bb56f64adb410eff, type: 2}
+  skeletonNone: {fileID: 137098, guid: c7e8a5bb79537a441836a1e2ea02a005, type: 2}
+  skeletonCyan: {fileID: 1000010498988072, guid: 375da41ce925bd546a34e406f609940f,
+    type: 2}
+  skeletonPurple: {fileID: 1000013814300192, guid: 4a967e9e95914194f9e81682db6faa8d,
+    type: 2}
+  skeletonPuke: {fileID: 1000012859847482, guid: 626c21f3dab5f254f87b4318c94f3a1f,
+    type: 2}
+  skeletonRed: {fileID: 1000011928221278, guid: c140ab0aafcd6364ca9ce9132e4f837a,
+    type: 2}
+  mapSize: {x: 0, y: 0}

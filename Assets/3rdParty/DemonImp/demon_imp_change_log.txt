@@ -1,0 +1,3 @@
+Demon Imp change log
+
+v3 - fixed a problem with the imp jump animation
