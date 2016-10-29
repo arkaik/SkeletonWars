@@ -62,6 +62,14 @@ public class TurnManagerScript : MonoBehaviour {
 		act (c);
 	}
 
+	void attack(int i, int j, params int[] altParams ) {
+	
+	}
+
+	void attackRange (int i, int j, int k, int l, params int[] altParams ) {
+	
+	}
+
 	void changeTeam (int newTeam) {
 		actualPlayer = newTeam;
 		//actualNumChars = charList [actualPlayer].Count;

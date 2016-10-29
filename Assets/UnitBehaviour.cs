@@ -97,7 +97,7 @@ public class UnitBehaviour : MonoBehaviour {
 		if (attackHit ())
 			attack = attackDamage;
 		if (criticalHit ())
-			attack = Mathf.CeilToInt(attack * 1.5);
+			attack = Mathf.CeilToInt(attack * 1.5f);
 		return attack;
 	}
 
