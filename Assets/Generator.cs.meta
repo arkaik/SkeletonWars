@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 4828dbfa7343efb49b36490a44cb05d7
-timeCreated: 1477746563
+timeCreated: 1477749872
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
@@ -8,6 +8,7 @@ MonoImporter:
   - tmanager: {fileID: 1000011212613648, guid: 0193d92a24b3bc94aad43f1f8c93643b, type: 2}
   - mcreator: {fileID: 1000013182272914, guid: bd3068e9944aae447a20ec5f0a4784be, type: 2}
   - ucreator: {fileID: 1000012081215776, guid: afbffbb7b9d986345b62d4e4b7969551, type: 2}
+  - imanager: {fileID: 1000013132162768, guid: c25c1548ba0651c429c11b0a9718bda8, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

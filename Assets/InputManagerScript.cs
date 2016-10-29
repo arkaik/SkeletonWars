@@ -17,8 +17,11 @@ public class InputManagerScript : MonoBehaviour {
 
 	private bool unitSelected;
 	private bool showActions;
+	private bool actionSelected;
 	private Image i1;
 	private Image i2;
+
+	private int actionOption;
 
 	private TurnManagerScript tmss;
 
@@ -34,7 +37,8 @@ public class InputManagerScript : MonoBehaviour {
 
 		unitSelected = false;
 		showActions = false;
-
+		actionOption = -1;
+		actionSelected = false;
 	}
 	
 	// Update is called once per frame
@@ -111,9 +115,14 @@ public class InputManagerScript : MonoBehaviour {
 				Color lol = i1.color;
 				i1.color = new Color (1f, 0f, 0f);
 				i2.color = new Color (1f, 1f, 1f);
+				actionOption = 1;
 			} else if (Input.GetKeyUp (KeyCode.A)) {
 				i2.color = new Color (1f, 0f, 0f);
 				i1.color = new Color (1f, 1f, 1f);
+				actionOption = 0;
+			} else if (Input.GetKeyUp (KeyCode.Space) && actionOption > -1) {
+				actionSelected = true;
+				unitSelected = false;
 			}
 
 		}
