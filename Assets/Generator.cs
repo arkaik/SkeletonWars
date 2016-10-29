@@ -12,15 +12,18 @@ public class Generator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		int x = 20;
+		int y = 40;
+
 		GameObject turnMan = Instantiate (tmanager);
 		GameObject mapCreator = Instantiate (mcreator);
 		GameObject unitCreator = Instantiate (ucreator);
 		tScript = turnMan.GetComponent<TurnManagerScript>();
 		mScript = mapCreator.GetComponent<MapCreation>();
 		uScript = unitCreator.GetComponent<UnitCreator>();
-		int x = 20;
-		int y = 40;
-		int[,] map = new int [x,y] ;
+		uScript.mapSize = new Vector2 (20, 40);
+
+		int[,] map = new int [x,y];
 		for(int i = 0; i < x; ++i) {
 			for(int j = 0; j < y; ++j) {
 				if (i == 0 || i == x-1 || j == 0 || j == y-1)

@@ -39,7 +39,7 @@ public class TurnManagerScript : MonoBehaviour {
 
 		timeStep = 0.4f;
 		timeExp = 0.0f;
-		timeExpStep = 0.05f;
+		timeExpStep = 0.04f;
 		timeExpLimit = 0.3f;
 
 		cursor = Instantiate (cursor, new Vector3 (1.0f, 1.5f, 1.0f), Quaternion.identity) as GameObject;
@@ -52,7 +52,7 @@ public class TurnManagerScript : MonoBehaviour {
 
 		accTime += Time.deltaTime;
 
-		if (Input.GetKey (KeyCode.LeftArrow) && accTime > (timeStep-timeExp)) {
+		if (Input.GetKey (KeyCode.A) && accTime > (timeStep-timeExp)) {
 			accTime -= (timeStep - timeExp);
 			if (timeExp < timeExpLimit) timeExp += timeExpStep;
 			cursor.transform.Translate (-1f, 0, 0);
@@ -60,30 +60,37 @@ public class TurnManagerScript : MonoBehaviour {
 			timeExp = 0.0f;
 		}
 
-		if (Input.GetKey (KeyCode.RightArrow) && accTime > (timeStep-timeExp)) {
+		if (Input.GetKey (KeyCode.D) && accTime > (timeStep-timeExp)) {
 			accTime -= (timeStep - timeExp);
 			if (timeExp < timeExpLimit) timeExp += timeExpStep;
 			cursor.transform.Translate (1f, 0, 0);
-		} else if (Input.GetKeyUp (KeyCode.RightArrow)) {
+		} else if (Input.GetKeyUp (KeyCode.D)) {
 			timeExp = 0.0f;
 		}
 
-		if (Input.GetKey (KeyCode.UpArrow)  && accTime > (timeStep-timeExp)) {
+		if (Input.GetKey (KeyCode.W)  && accTime > (timeStep-timeExp)) {
 			accTime -= (timeStep - timeExp);
 			if (timeExp < timeExpLimit) timeExp += timeExpStep;
 			cursor.transform.Translate (0, 1f, 0);
-		} else if (Input.GetKeyUp (KeyCode.UpArrow)) {
+		} else if (Input.GetKeyUp (KeyCode.W)) {
 			timeExp = 0.0f;
 		}
 
-		if (Input.GetKey (KeyCode.DownArrow)  && accTime > (timeStep-timeExp)) {
+		if (Input.GetKey (KeyCode.S)  && accTime > (timeStep-timeExp)) {
 			accTime -= (timeStep - timeExp);
 			if (timeExp < timeExpLimit) timeExp += timeExpStep;
 			cursor.transform.Translate (0, -1f, 0);
-		} else if (Input.GetKeyUp (KeyCode.DownArrow)) {
+		} else if (Input.GetKeyUp (KeyCode.S)) {
 			timeExp = 0.0f;
 		}
 
+		if (Input.GetKeyUp (KeyCode.Space)) {
+			Vector2 tilePosition = cursor.transform.position;
+			//Obtener GameObject de la matriz luego extraer sus funciones
+			//Mostrar opciones y elegir una
+			//Ejecutar acción
+			//Profit
+		}
 
 		if (actualNumFinishedChars == actualNumChars) {
 			changeTeam ((actualPlayer + 1) % playerNum);
