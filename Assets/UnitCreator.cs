@@ -7,7 +7,7 @@ public class UnitCreator : MonoBehaviour {
 	public GameObject lichObject;
 	public UnitBehaviour playerLich;
 	public GameObject skeletonObject;
-	public GameObject[] units;
+	public List<GameObject> units;
 
 	private UnitBehaviour script;
 
@@ -19,7 +19,7 @@ public class UnitCreator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		units = new GameObject[0];
+		units = new List<GameObject> ();
 	}
 	
 	// Update is called once per frame
@@ -40,6 +40,7 @@ public class UnitCreator : MonoBehaviour {
 		} else if (type == UnitType.Skeleton) {
 			GameObject skeleton;
 			skeleton = Instantiate (skeletonObject, posVec3, Quaternion.identity);
+			units.Add (skeleton);
 		}
 	}
 }
