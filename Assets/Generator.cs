@@ -18,15 +18,15 @@ public class Generator : MonoBehaviour {
 		GameObject turnMan = Instantiate (tmanager);
 		GameObject mapCreator = Instantiate (mcreator);
 		GameObject unitCreator = Instantiate (ucreator);
-		tScript = turnMan.GetComponent<TurnManagerScript>();
-		mScript = mapCreator.GetComponent<MapCreation>();
-		uScript = unitCreator.GetComponent<UnitCreator>();
+		tScript = turnMan.GetComponent<TurnManagerScript> ();
+		mScript = mapCreator.GetComponent<MapCreation> ();
+		uScript = unitCreator.GetComponent<UnitCreator> ();
 		uScript.mapSize = new Vector2 (20, 40);
 
-		int[,] map = new int [x,y];
-		for(int i = 0; i < x; ++i) {
-			for(int j = 0; j < y; ++j) {
-				if (i == 0 || i == x-1 || j == 0 || j == y-1)
+		int[,] map = new int [x, y];
+		for (int i = 0; i < x; ++i) {
+			for (int j = 0; j < y; ++j) {
+				if (i == 0 || i == x - 1 || j == 0 || j == y - 1)
 					map [i, j] = -1;
 				else
 					map [i, j] = 0;
@@ -35,9 +35,11 @@ public class Generator : MonoBehaviour {
 		//just to test
 		map [10, 10] = -1;
 		map [10, 20] = -1;
-		mScript.setMatrix (map,x,y);
+		mScript.setMatrix (map, x, y);
 
-		turnMan.GetComponent<TurnManagerScript> ().charMap = uScript.tutorialUnits (x, y);
+		uScript.tutorialUnits ();
+		turnMan.GetComponent<TurnManagerScript> ().unitMap = uScript.getUnitMap ();
+		turnMan.GetComponent<TurnManagerScript> ().unitList = uScript.getUnitLists ();
 	}
 
 	// Update is called once per frame

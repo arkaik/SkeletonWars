@@ -38,9 +38,10 @@ public class UnitBehaviour : MonoBehaviour {
 	public int attackActions = 2;
 	public Elemental attackElem = Elemental.None;
 
-	public void SetupStats (int pX, int pZ, int actions = 2, int steps = 5,  int p = 50, int crit = 10, int pRange = 20, int critRange = 10) {
+	public void SetupStats (int pX, int pZ, Team id, int actions = 2, int steps = 5,  int p = 50, int crit = 10, int pRange = 20, int critRange = 10) {
 		posX = pX;
 		posZ = pZ;
+		teamID = id;
 		actionsPerTurn = actions;
 		stepLength = steps;
 		if (pRange > 0) {

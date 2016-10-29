@@ -6,10 +6,14 @@ public class UnitCreator : MonoBehaviour {
 
 	public GameObject lichObject;
 	public GameObject skeletonObject;
-	public List<GameObject> units;
+	public GameObject[,] unitsByMap;
 	public Vector2 mapSize;
+	public List<List<GameObject>> unitsByTeam;
 
 	private UnitBehaviour playerLichScript;
+	private List<GameObject> teamNone;
+	private List<GameObject> teamPlayer;
+	private List<GameObject> teamEnemy1;
 
 	public enum UnitType {
 		Lich = 0,
@@ -30,14 +34,15 @@ public class UnitCreator : MonoBehaviour {
 	}
 
 	void createUnit(int posX, int posZ, UnitBehaviour.Team team, UnitType type = UnitType.Skeleton) {
-		GameObject unit;
+		GameObject unit = null;
 
 		if (type == UnitType.Lich) {
 			unit = Instantiate (lichObject, new Vector3(posX, lichObject.transform.lossyScale.y/2f, posZ), Quaternion.identity) as GameObject;
 			unit.transform.localScale = new Vector3 (unit.transform.lossyScale.y/unit.transform.lossyScale.y, 1, unit.transform.lossyScale.z/unit.transform.lossyScale.y);
-			unit.GetComponent<UnitBehaviour> ().SetupStats (posX, posZ, 3, 3, 100, 0, 0, 0);
+			unit.GetComponent<UnitBehaviour> ().SetupStats (posX, posZ, team, 3, 3, 100, 0, 0, 0);
 			unit.GetComponent<UnitBehaviour> ().SetupBaseAttack (4, 2, 3);
-			units.Insert(posZ*(int)mapSize.x+posX, unit);
+
+			unitsByMap[posZ, posX] = unit;
 
 			if (team == UnitBehaviour.Team.Player && playerLichScript == null )
 				playerLichScript = unit.GetComponent<UnitBehaviour> ();
@@ -45,27 +50,37 @@ public class UnitCreator : MonoBehaviour {
 		} else if (type == UnitType.Skeleton) {
 			unit = Instantiate (skeletonObject, new Vector3(posX, 0f, posZ), Quaternion.identity) as GameObject;
 			unit.transform.localScale = new Vector3 (unit.transform.localScale.x*0.3f, unit.transform.localScale.y*0.3f, unit.transform.localScale.z*0.3f);
-			unit.GetComponent<UnitBehaviour> ().SetupStats (posX, posZ);
-			units.Insert(posZ*(int)mapSize.x+posX, unit);
+			unit.GetComponent<UnitBehaviour> ().SetupStats (posX, posZ, team);
 
-
-			if (team == UnitBehaviour.Team.Enemy1) {
-				unit.transform.Rotate (new Vector3 (0, 180, 0));
-			}
-			
-			//units.Add (unit);
+			unitsByMap[posZ, posX] = unit;
 		}
-			
+
+		if (team == UnitBehaviour.Team.Player) {
+			teamPlayer.Add (unit);
+		} else if (team == UnitBehaviour.Team.Enemy1) {
+			unit.transform.Rotate (new Vector3 (0, 180, 0));
+			teamEnemy1.Add (unit);
+		}
+	}
+
+	void setMap(int x, int y) {
+		unitsByMap = new GameObject[y, x];
+		for (int i = 0; i < y; i++) {
+			for (int j = 0; j < x; j++) {
+				unitsByMap[i, j] = null;
+			}
+		}
+
+		unitsByTeam = new List<List<GameObject>> ();
+
+		teamNone = new List<GameObject> ();
+		teamPlayer = new List<GameObject> ();
+		teamEnemy1 = new List<GameObject> ();
 	}
 		
 
-	public List<GameObject> tutorialUnits(int x, int y) {
-		units = new List<GameObject>(x * y);
-		for (int i = 0; i < y; i++) {
-			for (int j = 0; j < x; j++) {
-				units.Insert(i * x + j, null);
-			}
-		}
+	public void tutorialUnits() {
+		setMap (20, 40);
 
 		createUnit (9, 5, UnitBehaviour.Team.Player, UnitType.Lich);
 		
@@ -84,6 +99,15 @@ public class UnitCreator : MonoBehaviour {
 		createUnit (16, 24, UnitBehaviour.Team.Enemy1);
 		createUnit (17, 26, UnitBehaviour.Team.Enemy1);
 
-		return units;
+		unitsByTeam.Add (teamPlayer);
+		unitsByTeam.Add (teamEnemy1);
+	}
+
+	public List<List<GameObject>> getUnitLists() {
+		return unitsByTeam;
+	}
+
+	public GameObject[,] getUnitMap() {
+		return unitsByMap;
 	}
 }

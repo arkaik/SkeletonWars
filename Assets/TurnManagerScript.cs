@@ -9,10 +9,10 @@ public class TurnManagerScript : MonoBehaviour {
 	public int playerNum = 2;
 	public int iaNum = 0;
 	public bool inTurn = true;
-	//public List<List<GameObject> > charList;
+	public List<List<GameObject> > unitList;
 
 	public List<int> terrain;
-	public List<GameObject> charMap;
+	public GameObject[,] unitMap;
 	public Vector2 mapSize;
 
 	private int actualPlayer;
@@ -90,10 +90,11 @@ public class TurnManagerScript : MonoBehaviour {
 			timeExp = 0.0f;
 		}
 
-		if (Input.GetKeyUp (KeyCode.Space) && !unitSelected) {
+		if (Input.GetKeyUp(KeyCode.Space) && !unitSelected) {
 			Vector3 tilePosition = cursor.transform.position;
-			int cpos = (int)tilePosition.z * (int)mapSize.x + (int)tilePosition.x;
-			GameObject c = charMap [cpos];
+			int ipos = (int)tilePosition.z;
+			int jpos = (int)tilePosition.x;
+			GameObject c = unitMap [ipos, jpos];
 			//UnitBehaviour ub = c.GetComponent<UnitBehaviour> ();
 			if (c != null) {
 				unitSelected = true;
@@ -113,7 +114,7 @@ public class TurnManagerScript : MonoBehaviour {
 
 	// Attack position (i,j) -> row i, column j
 	void execute(Action<GameObject> act, int i, int j) {
-		GameObject c = charMap [i * (int) mapSize.x + j];
+		GameObject c = unitMap [i, j];
 		act (c);
 	}
 
