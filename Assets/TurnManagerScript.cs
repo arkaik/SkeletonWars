@@ -9,7 +9,7 @@ public class TurnManagerScript : MonoBehaviour {
 	public int playerNum = 2;
 	public int iaNum = 0;
 	public bool inTurn = true;
-	//public List<List<GameObject> > charList;
+	public List<List<GameObject> > charList;
 
 	public List<int> terrain;
 	public List<GameObject> charMap;
