@@ -10,7 +10,7 @@ public class Generator : MonoBehaviour {
 	TurnManagerScript tScript;
 	MapCreation mScript;
 	UnitCreator uScript;
-	InputManagerScript iScript; 
+	InputManagerScript iScript;
 
 	// Use this for initialization
 	void Start () {
