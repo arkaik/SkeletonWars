@@ -5,7 +5,11 @@ using System.Collections.Generic;
 public class UnitCreator : MonoBehaviour {
 
 	public GameObject lichObject;
-	public GameObject skeletonObject;
+	public GameObject skeletonNone;
+	public GameObject skeletonCyan;
+	public GameObject skeletonPurple;
+	public GameObject skeletonPuke;
+	public GameObject skeletonRed;
 	public GameObject[,] unitsByMap;
 	public Vector2 mapSize;
 	public List<List<GameObject>> unitsByTeam;
@@ -23,9 +27,7 @@ public class UnitCreator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
 		playerLichScript = null;
-
 	}
 	
 	// Update is called once per frame
@@ -37,23 +39,27 @@ public class UnitCreator : MonoBehaviour {
 		GameObject unit = null;
 
 		if (type == UnitType.Lich) {
-			unit = Instantiate (lichObject, new Vector3(posX, lichObject.transform.lossyScale.y/2f, posZ), Quaternion.identity) as GameObject;
-			unit.transform.localScale = new Vector3 (unit.transform.lossyScale.y/unit.transform.lossyScale.y, 1, unit.transform.lossyScale.z/unit.transform.lossyScale.y);
+			unit = Instantiate (lichObject, new Vector3(posX, 0f, posZ), Quaternion.identity) as GameObject;
 			unit.GetComponent<UnitBehaviour> ().SetupStats (posX, posZ, team, 3, 3, 100, 0, 0, 0);
 			unit.GetComponent<UnitBehaviour> ().SetupBaseAttack (4, 2, 3);
-
-			unitsByMap[posZ, posX] = unit;
 
 			if (team == UnitBehaviour.Team.Player && playerLichScript == null )
 				playerLichScript = unit.GetComponent<UnitBehaviour> ();
 			
 		} else if (type == UnitType.Skeleton) {
-			unit = Instantiate (skeletonObject, new Vector3(posX, 0f, posZ), Quaternion.identity) as GameObject;
-			unit.transform.localScale = new Vector3 (unit.transform.localScale.x*0.3f, unit.transform.localScale.y*0.3f, unit.transform.localScale.z*0.3f);
-			unit.GetComponent<UnitBehaviour> ().SetupStats (posX, posZ, team);
+			if (team == UnitBehaviour.Team.Player)
+				unit = Instantiate (skeletonCyan, new Vector3(posX, 0f, posZ), Quaternion.identity) as GameObject;
+			else if (team == UnitBehaviour.Team.Enemy1)
+				unit = Instantiate (skeletonRed, new Vector3(posX, 0f, posZ), Quaternion.identity) as GameObject;
+			else
+				unit = Instantiate (skeletonNone, new Vector3(posX, 0f, posZ), Quaternion.identity) as GameObject;
 
-			unitsByMap[posZ, posX] = unit;
+			unit.GetComponent<UnitBehaviour> ().SetupStats (posX, posZ, team);
 		}
+
+		unit.transform.localScale = new Vector3 (unit.transform.localScale.x*0.3f, unit.transform.localScale.y*0.3f, unit.transform.localScale.z*0.3f);
+		unitsByMap[posZ, posX] = unit;
+		Color color = new Color (Random.value, Random.value, Random.value);
 
 		if (team == UnitBehaviour.Team.Player) {
 			teamPlayer.Add (unit);

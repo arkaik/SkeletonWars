@@ -101,10 +101,11 @@ MonoBehaviour:
   element: 0
   teamID: 1
   posX: 0
-  posY: 0
+  posZ: 0
   attackRange: 1
   attackArea: 1
   attackDamage: 1
+  attackActions: 2
   attackElem: 0
 --- !u!136 &136000012491019400
 CapsuleCollider:
