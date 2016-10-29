@@ -110,6 +110,10 @@ public class InputManagerScript : MonoBehaviour {
 			if (Input.GetKeyUp (KeyCode.D)) {
 				Color lol = i1.color;
 				i1.color = new Color (1f, 0f, 0f);
+				i2.color = new Color (1f, 1f, 1f);
+			} else if (Input.GetKeyUp (KeyCode.A)) {
+				i2.color = new Color (1f, 0f, 0f);
+				i1.color = new Color (1f, 1f, 1f);
 			}
 
 		}
