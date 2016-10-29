@@ -8,7 +8,7 @@ public class UnitCreator : MonoBehaviour {
 	public GameObject skeletonObject;
 	public List<GameObject> units;
 
-	private UnitBehaviour script;
+	private UnitBehaviour playerLichScript;
 
 	public enum UnitType {
 		Lich = 0,
@@ -19,7 +19,7 @@ public class UnitCreator : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		units = new List<GameObject> ();
-		script = null;
+		playerLichScript = null;
 	}
 	
 	// Update is called once per frame
@@ -28,19 +28,28 @@ public class UnitCreator : MonoBehaviour {
 	}
 
 	void createUnit(int posX, int posZ, UnitBehaviour.Team team, UnitType type = UnitType.Skeleton) {
-		GameObject lich;
+		GameObject unit;
 
 		if (type == UnitType.Lich) {
-			lich = Instantiate (lichObject, new Vector3(posX, 0, posZ), Quaternion.identity) as GameObject;
-			lich.GetComponent<UnitBehaviour> ().SetupStats (posX, posZ, 3, 3, 100, 0, 0, 0);
-			lich.GetComponent<UnitBehaviour> ().SetupBaseAttack (4, 2, 3);
+			unit = Instantiate (lichObject, new Vector3(posX, lichObject.transform.lossyScale.y/2f, posZ), Quaternion.identity) as GameObject;
+			unit.transform.localScale = new Vector3 (unit.transform.lossyScale.y/unit.transform.lossyScale.y, 1, unit.transform.lossyScale.z/unit.transform.lossyScale.y);
+			unit.GetComponent<UnitBehaviour> ().SetupStats (posX, posZ, 3, 3, 100, 0, 0, 0);
+			unit.GetComponent<UnitBehaviour> ().SetupBaseAttack (4, 2, 3);
+			units.Add (unit);
 
-			if (team == UnitBehaviour.Team.Player && script == null )
-				script = lich.GetComponent<UnitBehaviour> ();
+			if (team == UnitBehaviour.Team.Player && playerLichScript == null )
+				playerLichScript = unit.GetComponent<UnitBehaviour> ();
+			
 		} else if (type == UnitType.Skeleton) {
-			GameObject skeleton;
-			skeleton = Instantiate (skeletonObject, new Vector3(posX, 0, posZ), Quaternion.identity) as GameObject;
-			units.Add (skeleton);
+			unit = Instantiate (skeletonObject, new Vector3(posX, skeletonObject.transform.lossyScale/2f, posZ), Quaternion.identity) as GameObject;
+			unit.transform.localScale = new Vector3 (unit.transform.lossyScale.x/unit.transform.lossyScale.y, 1, unit.transform.lossyScale.z/unit.transform.lossyScale.y);
+			unit.GetComponent<UnitBehaviour> ().SetupStats (posX, posZ);
+
+			if (team == UnitBehaviour.Team.Enemy1) {
+				unit.transform.Rotate (new Vector3 (0, 180, 0));
+			}
+			
+			units.Add (unit);
 		}
 	}
 
