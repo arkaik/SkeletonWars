@@ -27,7 +27,7 @@ public class TurnManagerScript : MonoBehaviour {
 		//Estamos en turno
 		inTurn = true;
 		actualPlayer = 0;
-		//actualNumChars = charList [actualPlayer].Count;
+		actualNumChars = 1;//charList [actualPlayer].Count;
 		// Characters that have finished its actions
 		actualNumFinishedChars = 0;
 	}

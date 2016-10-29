@@ -30,16 +30,16 @@ public class UnitBehaviour : MonoBehaviour {
 	public Elemental element = Elemental.None;
 	public Team teamID = Team.Player;
 	public int posX;
-	public int posY;
+	public int posZ;
 
 	public int attackRange = 1;
 	public int attackArea = 1;
 	public int attackDamage = 1;
 	public Elemental attackElem = Elemental.None;
 
-	public void SetupStats (int pX, int pY, int actions = 2, int steps = 5,  int p = 50, int crit = 10, int pRange = 20, int critRange = 10) {
+	public void SetupStats (int pX, int pZ, int actions = 2, int steps = 5,  int p = 50, int crit = 10, int pRange = 20, int critRange = 10) {
 		posX = pX;
-		posY = pY;
+		posZ = pZ;
 		actionsPerTurn = actions;
 		stepLength = steps;
 		if (pRange > 0) {
@@ -62,6 +62,21 @@ public class UnitBehaviour : MonoBehaviour {
 		attackArea = a;
 		attackDamage = d;
 		attackElem = e;
+	}
+
+	bool attackHit() {
+		return (Random.Range (0, 100) < precision);
+	}
+
+	bool criticalHit() {
+		return (Random.Range (0, 100) < critChance);
+	}
+
+	void receiveDamage(int damage) {
+		if (health <= damage)
+			Die ();
+		else
+			health -= damage;
 	}
 
 	// Use this for initialization
