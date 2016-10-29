@@ -31,6 +31,8 @@ public class TurnManagerScript : MonoBehaviour {
 		// Characters that have finished its actions
 		actualNumFinishedChars = 0;
 
+		cursor = Instantiate (cursor, new Vector3 (1.5f, 1.0f, 1.5f), Quaternion.identity) as GameObject;
+
 	}
 	
 	// Update is called once per frame
