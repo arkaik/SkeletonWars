@@ -31,7 +31,7 @@ public class TurnManagerScript : MonoBehaviour {
 		// Characters that have finished its actions
 		actualNumFinishedChars = 0;
 
-		cursor = Instantiate (cursor, new Vector3 (1.5f, 1.0f, 1.5f), Quaternion.identity) as GameObject;
+		cursor = Instantiate (cursor, new Vector3 (1.0f, 1.0f, 1.0f), Quaternion.identity) as GameObject;
 
 	}
 	
@@ -39,19 +39,19 @@ public class TurnManagerScript : MonoBehaviour {
 	void Update () {
 
 		if (Input.GetKey (KeyCode.LeftArrow)) {
-			cursor.transform.Translate (-1, 0, 0);
+			cursor.transform.Translate (-0.25f, 0, 0);
 		}
 
 		if (Input.GetKey (KeyCode.RightArrow)) {
-			cursor.transform.Translate (1, 0, 0);
+			cursor.transform.Translate (0.25f, 0, 0);
 		}
 
 		if (Input.GetKey (KeyCode.UpArrow)) {
-			cursor.transform.Translate (0, 0, 1);
+			cursor.transform.Translate (0, 0, 0.25f);
 		}
 
 		if (Input.GetKey (KeyCode.DownArrow)) {
-			cursor.transform.Translate (0, 0, -1);
+			cursor.transform.Translate (0, 0, -0.25f);
 		}
 
 		if (actualNumFinishedChars == actualNumChars) {
