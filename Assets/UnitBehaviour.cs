@@ -35,6 +35,7 @@ public class UnitBehaviour : MonoBehaviour {
 	public int attackRange = 1;
 	public int attackArea = 1;
 	public int attackDamage = 1;
+	public int attackActions = 2;
 	public Elemental attackElem = Elemental.None;
 
 	public void SetupStats (int pX, int pZ, int actions = 2, int steps = 5,  int p = 50, int crit = 10, int pRange = 20, int critRange = 10) {
@@ -55,13 +56,16 @@ public class UnitBehaviour : MonoBehaviour {
 				critChance = 0;
 		} else
 			critChance = crit;
+		
+		remainingActions = actionsPerTurn;
 	}
 
-	public void SetupBaseAttack (int r = 1, int a = 1, int d = 1, Elemental e = Elemental.None) {
+	public void SetupBaseAttack (int r = 1, int a = 1, int d = 1, Elemental e = Elemental.None, int act = 2) {
 		attackRange = r;
 		attackArea = a;
 		attackDamage = d;
 		attackElem = e;
+		attackActions = act;
 	}
 
 	bool attackHit() {
@@ -79,9 +83,27 @@ public class UnitBehaviour : MonoBehaviour {
 			health -= damage;
 	}
 
+	public void moveAct() {
+		remainingActions -= 1;
+		if (remainingActions < 0)
+			remainingActions = 0;
+	}
+
+	public int attackAct() {
+		remainingActions -= attackActions;
+		if (remainingActions < 0)
+			remainingActions = 0;
+		int attack = 0;
+		if (attackHit ())
+			attack = attackDamage;
+		if (criticalHit ())
+			attack = Mathf.CeilToInt(attack * 1.5);
+		return attack;
+	}
+
 	// Use this for initialization
 	void Start () {
-	
+		remainingActions = actionsPerTurn;
 	}
 	
 	// Update is called once per frame
