@@ -9,33 +9,46 @@ public class TurnManagerScript : MonoBehaviour {
 	public int playerNum = 2;
 	public int iaNum = 0;
 	public bool inTurn = true;
-	public List<List<GameObject> > charList;
+	//public List<List<GameObject> > charList;
 
-	public ArrayList<int> terrain;
-	public ArrayList<int> charMap;
+	public List<int> terrain;
+	public List<GameObject> charMap;
 	public Vector2 mapSize;
 
 	private int actualPlayer;
 	private int actualNumChars;
 	private int actualNumFinishedChars;
-	private int actualChar;
+
+	public GameObject cursor;
 
 	// Use this for initialization
 	void Start () {
+		
 		//Estamos en turno
 		inTurn = true;
 		actualPlayer = 0;
-		actualNumChars = charList [actualPlayer].Count;
+		//actualNumChars = charList [actualPlayer].Count;
 		// Characters that have finished its actions
 		actualNumFinishedChars = 0;
-		actualChar = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKeyUp (KeyCode.Space)) {
-			
+		if (Input.GetKey (KeyCode.LeftArrow)) {
+			cursor.transform.Translate (-1, 0, 0);
+		}
+
+		if (Input.GetKey (KeyCode.RightArrow)) {
+			cursor.transform.Translate (1, 0, 0);
+		}
+
+		if (Input.GetKey (KeyCode.UpArrow)) {
+			cursor.transform.Translate (0, 0, 1);
+		}
+
+		if (Input.GetKey (KeyCode.DownArrow)) {
+			cursor.transform.Translate (0, 0, -1);
 		}
 
 		if (actualNumFinishedChars == actualNumChars) {
@@ -44,16 +57,15 @@ public class TurnManagerScript : MonoBehaviour {
 	}
 
 	// Attack position (i,j) -> row i, column j
-	void attack(int i, int j) {
-		GameObject c = charMap [i * mapSize.x + j];
-
-	} 
+	void execute(Action<GameObject> act, int i, int j) {
+		GameObject c = charMap [i * (int) mapSize.x + j];
+		act (c);
+	}
 
 	void changeTeam (int newTeam) {
 		actualPlayer = newTeam;
-		actualNumChars = charList [actualPlayer].Count;
+		//actualNumChars = charList [actualPlayer].Count;
 		actualNumFinishedChars = 0;
-		actualChar = 0;
 	}
 
 }

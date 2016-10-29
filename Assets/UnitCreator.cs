@@ -31,7 +31,7 @@ public class UnitCreator : MonoBehaviour {
 		GameObject lich;
 
 		if (type == UnitType.Lich) {
-			lich = Instantiate (lichObject, posVec3, Quaternion.identity);
+			lich = Instantiate (lichObject, posVec3, Quaternion.identity) as GameObject;
 			lich.GetComponent<UnitBehaviour> ().SetupStats (posX, posY, 3, 3, 100, 0, 0, 0);
 			lich.GetComponent<UnitBehaviour> ().SetupBaseAttack (4, 2, 3);
 
@@ -39,7 +39,7 @@ public class UnitCreator : MonoBehaviour {
 				playerLich = lich.GetComponent<UnitBehaviour> ();
 		} else if (type == UnitType.Skeleton) {
 			GameObject skeleton;
-			skeleton = Instantiate (skeletonObject, posVec3, Quaternion.identity);
+			skeleton = Instantiate (skeletonObject, posVec3, Quaternion.identity) as GameObject;
 			units.Add (skeleton);
 		}
 	}
