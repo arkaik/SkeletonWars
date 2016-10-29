@@ -27,7 +27,7 @@ public class MapCreation : MonoBehaviour {
 	}
 
 
-	void setMatrix(int[,] new_floor, int x, int z){
+	public void setMatrix(int[,] new_floor, int x, int z){
 		matrix = new_floor;
 		vs = x;
 		hs = z;
