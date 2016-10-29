@@ -41,9 +41,9 @@ public class TurnManagerScript : MonoBehaviour {
 		// Characters that have finished its actions
 		actualNumFinishedChars = 0;
 
-		timeStep = 0.2f;
+		timeStep = 0.3f;
 		timeExp = 0.0f;
-		timeExpStep = 0.05f;
+		timeExpStep = 0.02f;
 		timeExpLimit = 0.15f;
 
 		cursor = Instantiate (cursor, new Vector3 (1.0f, 1.5f, 1.0f), Quaternion.identity) as GameObject;
@@ -58,37 +58,46 @@ public class TurnManagerScript : MonoBehaviour {
 
 		accTime += Time.deltaTime;
 
-		if (Input.GetKey (KeyCode.A) && accTime > (timeStep-timeExp)) {
-			accTime -= (timeStep - timeExp);
-			if (timeExp < timeExpLimit) timeExp += timeExpStep;
-			cursor.transform.Translate (-1f, 0, 0);
-		} else if (Input.GetKeyUp (KeyCode.LeftArrow)) {
-			timeExp = 0.0f;
+		if (!showActions) {
+			if (Input.GetKey (KeyCode.A) && accTime > (timeStep - timeExp)) {
+				accTime -= (timeStep - timeExp);
+				if (timeExp < timeExpLimit)
+					timeExp += timeExpStep;
+				cursor.transform.Translate (-1f, 0, 0);
+			} else if (Input.GetKeyUp (KeyCode.LeftArrow)) {
+				timeExp = 0.0f;
+			}
+
+			if (Input.GetKey (KeyCode.D) && accTime > (timeStep - timeExp)) {
+				accTime -= (timeStep - timeExp);
+				if (timeExp < timeExpLimit)
+					timeExp += timeExpStep;
+				cursor.transform.Translate (1f, 0, 0);
+			} else if (Input.GetKeyUp (KeyCode.D)) {
+				timeExp = 0.0f;
+			}
+
+			if (Input.GetKey (KeyCode.W) && accTime > (timeStep - timeExp)) {
+				accTime -= (timeStep - timeExp);
+				if (timeExp < timeExpLimit)
+					timeExp += timeExpStep;
+				cursor.transform.Translate (0, 1f, 0);
+			} else if (Input.GetKeyUp (KeyCode.W)) {
+				timeExp = 0.0f;
+			}
+
+			if (Input.GetKey (KeyCode.S) && accTime > (timeStep - timeExp)) {
+				accTime -= (timeStep - timeExp);
+				if (timeExp < timeExpLimit)
+					timeExp += timeExpStep;
+				cursor.transform.Translate (0, -1f, 0);
+			} else if (Input.GetKeyUp (KeyCode.S)) {
+				timeExp = 0.0f;
+			}
+		} else if (showActions) {
+			
 		}
 
-		if (Input.GetKey (KeyCode.D) && accTime > (timeStep-timeExp)) {
-			accTime -= (timeStep - timeExp);
-			if (timeExp < timeExpLimit) timeExp += timeExpStep;
-			cursor.transform.Translate (1f, 0, 0);
-		} else if (Input.GetKeyUp (KeyCode.D)) {
-			timeExp = 0.0f;
-		}
-
-		if (Input.GetKey (KeyCode.W)  && accTime > (timeStep-timeExp)) {
-			accTime -= (timeStep - timeExp);
-			if (timeExp < timeExpLimit) timeExp += timeExpStep;
-			cursor.transform.Translate (0, 1f, 0);
-		} else if (Input.GetKeyUp (KeyCode.W)) {
-			timeExp = 0.0f;
-		}
-
-		if (Input.GetKey (KeyCode.S)  && accTime > (timeStep-timeExp)) {
-			accTime -= (timeStep - timeExp);
-			if (timeExp < timeExpLimit) timeExp += timeExpStep;
-			cursor.transform.Translate (0, -1f, 0);
-		} else if (Input.GetKeyUp (KeyCode.S)) {
-			timeExp = 0.0f;
-		}
 
 		if (Input.GetKeyUp(KeyCode.Space) && !unitSelected) {
 			Vector3 tilePosition = cursor.transform.position;
