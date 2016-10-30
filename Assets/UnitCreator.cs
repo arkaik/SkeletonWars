@@ -95,7 +95,7 @@ public class UnitCreator : MonoBehaviour {
 
 		createUnit (8, 12, UnitBehaviour.Team.Enemy1);
 		createUnit (10, 12, UnitBehaviour.Team.Enemy1);
-		createUnit (8, 12, UnitBehaviour.Team.Enemy1);
+		createUnit (9, 13, UnitBehaviour.Team.Enemy1);
 		createUnit (5, 17, UnitBehaviour.Team.Enemy1);
 		createUnit (4, 18, UnitBehaviour.Team.Enemy1);
 		createUnit (5, 19, UnitBehaviour.Team.Enemy1);

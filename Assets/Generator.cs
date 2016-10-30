@@ -44,7 +44,10 @@ public class Generator : MonoBehaviour {
 		uScript.tutorialUnits ();
 		turnMan.GetComponent<TurnManagerScript> ().unitMap = uScript.getUnitMap ();
 		turnMan.GetComponent<TurnManagerScript> ().unitList = uScript.getUnitLists ();
+		tScript.mapSize = new Vector2 (20, 40);
+		tScript.terrain = map;
 		inputMan.GetComponent<InputManagerScript> ().setTurnMan(tScript);
+
 	}
 
 	// Update is called once per frame

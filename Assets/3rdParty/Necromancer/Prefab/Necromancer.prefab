@@ -717,6 +717,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400094}
   - 111: {fileID: 11100000}
+  - 114: {fileID: 114000010571928154}
   m_Layer: 0
   m_Name: Necromancer
   m_TagString: Untagged
@@ -1553,3 +1554,31 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100094}
   m_IsPrefabParent: 1
+--- !u!114 &114000010571928154
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f685a25083417604590f9afdb346f66f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionsPerTurn: 2
+  remainingActions: 0
+  stepLength: 5
+  precision: 50
+  critChance: 10
+  health: 4
+  armour: 0
+  mana: 0
+  element: 0
+  teamID: 1
+  posX: 0
+  posZ: 0
+  attackRange: 1
+  attackArea: 1
+  attackDamage: 1
+  attackActions: 2
+  attackElem: 0

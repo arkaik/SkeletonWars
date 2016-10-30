@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class InputManagerScript : MonoBehaviour {
 
-	public GameObject cursor;
+	private GameObject cursor;
 	public Image image_move;
 	public Image image_attack;
 
@@ -18,8 +18,10 @@ public class InputManagerScript : MonoBehaviour {
 	private bool unitSelected;
 	private bool showActions;
 	private bool actionSelected;
+	private bool selectTargetPos;
 	private Image i1;
 	private Image i2;
+	private GameObject gosel;
 
 	private int actionOption;
 
@@ -27,18 +29,20 @@ public class InputManagerScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		timeStep = 0.3f;
+		timeStep = 0.75f;
 		timeExp = 0.0f;
-		timeExpStep = 0.02f;
-		timeExpLimit = 0.15f;
+		timeExpStep = 0.05f;
+		timeExpLimit = 0.1f;
 
-		cursor = Instantiate (cursor, new Vector3 (1.0f, 1.5f, 1.0f), Quaternion.identity) as GameObject;
-		cursor.transform.Rotate (new Vector3(90, 0, 0));
+		cursor = GameObject.Find ("Cursor");
+		//cursor.transform.Rotate (new Vector3(90, 0, 0));
 
 		unitSelected = false;
 		showActions = false;
 		actionOption = -1;
 		actionSelected = false;
+		selectTargetPos = false;
+		gosel = null;
 	}
 	
 	// Update is called once per frame
@@ -92,22 +96,61 @@ public class InputManagerScript : MonoBehaviour {
 		}
 
 
-		if (Input.GetKeyUp(KeyCode.Space) && !unitSelected) {
+		if (Input.GetKeyUp(KeyCode.Space) && !unitSelected && !actionSelected) {
 			Vector3 tilePosition = cursor.transform.position;
 			int ipos = (int)tilePosition.z;
 			int jpos = (int)tilePosition.x;
 			GameObject c = tmss.getUnitAtTile(ipos, jpos);
-			//UnitBehaviour ub = c.GetComponent<UnitBehaviour> ();
+
 			if (c != null) {
-				unitSelected = true;
-				showActions = true;
-				GameObject canv =  GameObject.Find ("Canvas");
-				i1 = Instantiate (image_move);
-				i1.transform.SetParent (canv.transform, false);
-				i2 = Instantiate (image_attack);
-				i2.transform.SetParent (canv.transform, false);
+				UnitBehaviour ub = c.GetComponent<UnitBehaviour> ();
+				UnitBehaviour.Team mahteam = (UnitBehaviour.Team) tmss.actualPlayer;
+				if (ub.teamID == UnitBehaviour.Team.Player && ub.remainingActions != 0) {
+					gosel = c;
+					unitSelected = true;
+					showActions = true;
+					GameObject canv = GameObject.Find ("Canvas");
+					i1 = Instantiate (image_move);
+					i1.transform.SetParent (canv.transform, false);
+					i2 = Instantiate (image_attack);
+					i2.transform.SetParent (canv.transform, false);
+				} else {
+					changeCursorColor (Color.red);
+				}
 			}
 
+		}
+
+		if (actionSelected) { 
+			if (Input.GetKeyUp (KeyCode.Escape)) {
+				actionSelected = false;
+				changeCursorColor (Color.cyan);
+			}
+
+			if (Input.GetKeyUp (KeyCode.Space) && !selectTargetPos) {
+				switch (actionOption) {
+				case 0:
+					break;
+				case 1:
+					Vector3 tpos = cursor.transform.position;
+					if (tmss.canMoveTo (gosel, (int)tpos.z, (int)tpos.x)) {
+						tmss.moveTo (gosel, (int)tpos.z, (int)tpos.x);
+						changeCursorColor (Color.cyan);
+					} else {
+						changeCursorColor (Color.red);
+					}
+					break;
+				default:
+					break;
+				}
+
+				actionSelected = false;
+				gosel = null;
+				actionOption = -1;
+				selectTargetPos = false; 
+
+
+			}
 		}
 
 		if (unitSelected) {
@@ -116,27 +159,36 @@ public class InputManagerScript : MonoBehaviour {
 				i1.color = new Color (1f, 0f, 0f);
 				i2.color = new Color (1f, 1f, 1f);
 				actionOption = 1;
-			} else if (Input.GetKeyUp (KeyCode.A)) {
+			}
+			if (Input.GetKeyUp (KeyCode.A)) {
 				i2.color = new Color (1f, 0f, 0f);
 				i1.color = new Color (1f, 1f, 1f);
 				actionOption = 0;
-			} else if (Input.GetKeyUp (KeyCode.Space) && actionOption > -1) {
+			}
+
+			if (Input.GetKeyUp (KeyCode.Space) && actionOption > -1) {
+				selectTargetPos = false;
 				actionSelected = true;
 				unitSelected = false;
 				showActions = false;
 				DestroyObject (i1);
 				DestroyObject (i2);
+				changeCursorColor(new Color(1,1,0));
 			}
 
 		}
 
-		if (actionSelected) {
-			
-		}
+
 
 	}
 
 	public void setTurnMan(TurnManagerScript tms) {
 		tmss = tms;
 	}
+
+	private void changeCursorColor(Color c) {
+		Light li = cursor.GetComponent<Light> () as Light;
+		li.color = c;
+	}
+		
 }
