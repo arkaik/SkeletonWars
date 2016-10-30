@@ -90,15 +90,15 @@ public class InputManagerScript : MonoBehaviour {
 					unitSelected = true;
 					showActions = true;
 					GameObject canv = GameObject.Find ("Canvas");
-					images [0] = Instantiate (imageMove);
+					images [0] = Instantiate (imageAttack);
 					images[0].transform.SetParent (canv.transform, false);
-					images [0].transform.position = new Vector3 (20, 0, 20);
-					images[1] = Instantiate (imageAttack);
+					images [0].transform.position = new Vector3 (50, 0, 50);
+					images[1] = Instantiate (imageMove);
 					images[1].transform.SetParent (canv.transform, false);
-					images [1].transform.position = new Vector3 (40, 0, 20);
+					images [1].transform.position = new Vector3 (100, 0, 50);
 					images[2] = Instantiate (imageEndTurn);
 					images[2].transform.SetParent (canv.transform, false);
-					images [2].transform.position = new Vector3 (60, 0, 20);
+					images [2].transform.position = new Vector3 (150, 0, 50);
 
 				} else {
 					changeCursorColor (Color.red);

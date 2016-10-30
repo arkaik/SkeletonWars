@@ -79,11 +79,12 @@ public class TurnManagerScript : MonoBehaviour {
 
 	public void moveTo(GameObject go, int i, int j) {
 		UnitBehaviour ub = go.GetComponent<UnitBehaviour> ();
+		ub.moveAct ();
 		int pi = (int)go.transform.position.z;
 		int pj = (int)go.transform.position.x;
 		List<position> movement = getPathBFS (pi, pj, i, j);
 		//TODO: MOVEMENT
-		ub.moveAct ();
+
 		if (ub.remainingActions == 0)
 			actualNumFinishedChars += 1;
 		//Move the unit
@@ -91,6 +92,7 @@ public class TurnManagerScript : MonoBehaviour {
 		//Update matrices
 		unitMap.SetValue(null, pi, pj);
 		unitMap.SetValue(go, i, j);
+		ub.stopMoveAct ();
 	}
 
 	public void attackTo(GameObject go, int i, int j) {
