@@ -96,6 +96,19 @@ public class TurnManagerScript : MonoBehaviour {
 		ub.stopMoveAct ();
 	}
 
+	public bool canAttackTo(GameObject go, int i, int j) {
+		UnitBehaviour ub = go.GetComponent<UnitBehaviour> ();
+		int ra = ub.remainingActions;
+		int pi = (int)go.transform.position.z;
+		int pj = (int)go.transform.position.x;
+		Vector2 diff = new Vector2(Math.Abs(pi - i), Math.Abs(pj - j));
+
+		if ((diff.x+diff.y) < ub.attackRange && ra > 0 && terrain [j, i] == 0)
+			return true;
+		else
+			return false;
+	}
+
 	public void attackTo(GameObject go, int i, int j) {
 		int area = go.GetComponent<UnitBehaviour> ().attackArea;
 

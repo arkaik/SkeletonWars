@@ -122,8 +122,12 @@ public class InputManagerScript : MonoBehaviour {
 				Vector3 tpos = cursor.transform.position;
 				switch (actionOption) {
 				case 0:
-					tmss.attackTo (gosel, (int)tpos.z, (int)tpos.x);
-					changeCursorColor (Color.cyan);
+					if (tmss.canAttackTo (gosel, (int)tpos.z, (int)tpos.x)) {
+						tmss.attackTo (gosel, (int)tpos.z, (int)tpos.x);
+						changeCursorColor (Color.cyan);
+					} else {
+						changeCursorColor (Color.red);
+					}
 					break;
 				case 1:
 					if (tmss.canMoveTo (gosel, (int)tpos.z, (int)tpos.x)) {
