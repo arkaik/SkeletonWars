@@ -71,6 +71,7 @@ public class TurnManagerScript : MonoBehaviour {
 		int pi = (int)go.transform.position.z;
 		int pj = (int)go.transform.position.x;
 		Vector2 diff = new Vector2(Math.Abs(pi - i), Math.Abs(pj - j));
+
 		if ((diff.x+diff.y) < ub.stepLength && ra > 0 && terrain [j, i] == 0)
 			return true;
 		else
@@ -96,6 +97,15 @@ public class TurnManagerScript : MonoBehaviour {
 	}
 
 	public void attackTo(GameObject go, int i, int j) {
+		int area = go.GetComponent<UnitBehaviour> ().attackArea;
+
+		if (area > 1)
+			attackToArea (go, i, j);
+		else
+			attackToSingleTarget (go, i, j);
+	}
+
+	void attackToSingleTarget(GameObject go, int i, int j) {
 		UnitBehaviour ub = go.GetComponent<UnitBehaviour> ();
 		int pi = (int)go.transform.position.z;
 		int pj = (int)go.transform.position.x;
@@ -107,8 +117,26 @@ public class TurnManagerScript : MonoBehaviour {
 			ubt.receiveDamage (damage);
 		}
 	}
+		
+	void attackToArea(GameObject go, int x, int y) {
+		UnitBehaviour ub = go.GetComponent<UnitBehaviour> ();
+		int pi = (int)go.transform.position.z;
+		int pj = (int)go.transform.position.x;
+		int area = ub.attackArea;
 
-	public void changeTeam (int newTeam) {
+		for (int i = -area; i <= area; i++) {
+			for (int j = -area; j <= area; j++) {
+				if (x+i >= 0 && y+j >= 0 && unitMap [x+i, y+j] != null) {
+					GameObject t = unitMap [x+i, y+j];
+					UnitBehaviour ubt = t.GetComponent<UnitBehaviour> ();
+					int damage = ub.attackAct ();
+					ubt.receiveDamage (damage);
+				}
+			}
+		}
+	}
+
+	void changeTeam (int newTeam) {
 		actualPlayer = newTeam;
 		actualNumChars = unitList [actualPlayer].Count;
 		actualNumFinishedChars = 0;

@@ -92,7 +92,7 @@ public class InputManagerScript : MonoBehaviour {
 					unitSelected = true;
 					showActions = true;
 					actualImage = 0;
-					actionOption = 0;
+					actionOption = -1;
 					GameObject canv = GameObject.Find ("Canvas");
 					images [0] = Instantiate (imageAttack);
 					images[0].transform.SetParent (canv.transform, false);
@@ -142,7 +142,7 @@ public class InputManagerScript : MonoBehaviour {
 
 				actionSelected = false;
 				gosel = null;
-				actionOption = 0;
+				actionOption = -1;
 				selectTargetPos = false; 
 
 
@@ -172,7 +172,7 @@ public class InputManagerScript : MonoBehaviour {
 			}
 				
 
-			if (Input.GetKeyUp (KeyCode.Space) && actionOption != -1) {
+			if (Input.GetKeyUp (KeyCode.Space) && actionOption > -1) {
 				selectTargetPos = false;
 				actionSelected = true;
 				unitSelected = false;

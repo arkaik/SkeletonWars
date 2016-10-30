@@ -49,10 +49,11 @@ public class UnitBehaviour : MonoBehaviour {
 
 	public Animator anim;
 
-	public void SetupStats (int pX, int pZ, Team id, int actions = 2, int steps = 5,  int p = 50, int crit = 10, int pRange = 20, int critRange = 10) {
+	public void SetupStats (int pX, int pZ, Team id, int h = 4, int p = 50, int crit = 10, int pRange = 20, int critRange = 10, int steps = 5, int actions = 2) {
 		posX = pX;
 		posZ = pZ;
 		teamID = id;
+		health = h;
 		actionsPerTurn = actions;
 		stepLength = steps;
 		if (pRange > 0) {
@@ -72,7 +73,7 @@ public class UnitBehaviour : MonoBehaviour {
 		remainingActions = actionsPerTurn;
 	}
 
-	public void SetupBaseAttack (int r = 1, int a = 1, int d = 1, Elemental e = Elemental.None, int act = 2) {
+	public void SetupBaseAttack (int r = 1, int d = 1, int a = 1, int act = 2, Elemental e = Elemental.None) {
 		attackRange = r;
 		attackArea = a;
 		attackDamage = d;
