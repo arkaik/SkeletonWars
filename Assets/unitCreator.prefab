@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13406b49a56381848a308c08e10f47dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lichObject: {fileID: 100094, guid: 8b79114391319fb4bb56f64adb410eff, type: 2}
+  lichObject: {fileID: 1000011792493290, guid: 8b79114391319fb4bb56f64adb410eff, type: 2}
   skeletonNone: {fileID: 137098, guid: c7e8a5bb79537a441836a1e2ea02a005, type: 2}
   skeletonCyan: {fileID: 1000010498988072, guid: 375da41ce925bd546a34e406f609940f,
     type: 2}

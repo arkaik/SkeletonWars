@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010891689096}
+  - 114: {fileID: 114000010923701130}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -39,3 +40,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &114000010923701130
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013024682154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e30eb79cd423fd04691b1402c8e578ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image_move: {fileID: 114000013716489878, guid: d80ae4a7a1bea5d48b549fbf1ef3f3f5,
+    type: 2}
+  image_attack: {fileID: 114000012902201940, guid: 8b74ce38e76531b42a1b0af65416b73a,
+    type: 2}
