@@ -47,6 +47,7 @@ public class AudioManager : MonoBehaviour {
 		dir = directory;
 	}
 	private void loadMap(){
+		mapSound = new Dictionary<string, int> ();
 		mapSound.Add ("sword", 0);
 		mapSound.Add ("dodgesword", 1);
 		mapSound.Add ("arrow", 2);
