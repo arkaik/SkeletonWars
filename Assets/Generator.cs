@@ -7,10 +7,12 @@ public class Generator : MonoBehaviour {
 	public GameObject mcreator;
 	public GameObject ucreator;
 	public GameObject imanager;
+	public GameObject amanager;
 	TurnManagerScript tScript;
 	MapCreation mScript;
 	UnitCreator uScript;
 	InputManagerScript iScript;
+	AudioManager aScript;
 
 	// Use this for initialization
 	void Start () {
@@ -21,6 +23,7 @@ public class Generator : MonoBehaviour {
 		GameObject mapCreator = Instantiate (mcreator);
 		GameObject unitCreator = Instantiate (ucreator);
 		GameObject inputMan = Instantiate (imanager);
+		GameObject audioMan = Instantiate (amanager);
 		tScript = turnMan.GetComponent<TurnManagerScript> ();
 		mScript = mapCreator.GetComponent<MapCreation> ();
 		uScript = unitCreator.GetComponent<UnitCreator> ();

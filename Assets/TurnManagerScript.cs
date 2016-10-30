@@ -150,6 +150,13 @@ public class TurnManagerScript : MonoBehaviour {
 	}
 
 	void changeTeam (int newTeam) {
+		int previousTeam = actualPlayer;
+		for (int i = 0; i < unitList [previousTeam].Count; i++) {
+			GameObject go = unitList [previousTeam] [i];
+			UnitBehaviour ub = go.GetComponent<UnitBehaviour> ();
+			ub.remainingActions = ub.actionsPerTurn;
+		}
+
 		actualPlayer = newTeam;
 		actualNumChars = unitList [actualPlayer].Count;
 		actualNumFinishedChars = 0;
