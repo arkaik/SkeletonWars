@@ -68,8 +68,8 @@ public class UnitCreator : MonoBehaviour {
 			else
 				unit = Instantiate (lichNone, new Vector3(posX, 0f, posZ), Quaternion.identity) as GameObject;
 
-			unit.GetComponent<UnitBehaviour> ().SetupStats (posX, posZ, team, 3, 3, 100, 0, 0, 0);
-			unit.GetComponent<UnitBehaviour> ().SetupBaseAttack (4, 2, 3);
+			unit.GetComponent<UnitBehaviour> ().SetupStats (posX, posZ, team, 10, 100, 0, 0, 0, 3, 3);
+			unit.GetComponent<UnitBehaviour> ().SetupBaseAttack (4, 3, 2);
 			unit.transform.localScale = new Vector3 (unit.transform.localScale.x*0.3f, unit.transform.localScale.y*0.3f, unit.transform.localScale.z*0.3f);
 
 			if (team == UnitBehaviour.Team.Player && playerLichScript == null )
@@ -93,8 +93,9 @@ public class UnitCreator : MonoBehaviour {
 				unit = Instantiate (archerRed, new Vector3(posX, 0f, posZ), Quaternion.identity) as GameObject;
 			else
 				unit = Instantiate (archerNone, new Vector3(posX, 0f, posZ), Quaternion.identity) as GameObject;
-
-			unit.GetComponent<UnitBehaviour> ().SetupStats (posX, posZ, team);
+			
+			unit.GetComponent<UnitBehaviour> ().SetupStats (posX, posZ, team, 2, 80, 10, 15, 5, 7, 1);
+			unit.GetComponent<UnitBehaviour> ().SetupBaseAttack (5, 2);
 
 		} else if (type == UnitType.Imp) {
 			if (team == UnitBehaviour.Team.Player)
@@ -104,7 +105,7 @@ public class UnitCreator : MonoBehaviour {
 			else
 				unit = Instantiate (impNone, new Vector3(posX, 0f, posZ), Quaternion.identity) as GameObject;
 
-			unit.GetComponent<UnitBehaviour> ().SetupStats (posX, posZ, team);
+			unit.GetComponent<UnitBehaviour> ().SetupStats (posX, posZ, team, 2, 30, 10, 30, 15, 10, 2);
 
 		} else if (type == UnitType.Zombie) {
 			if (team == UnitBehaviour.Team.Player)
