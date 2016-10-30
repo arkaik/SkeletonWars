@@ -717,7 +717,11 @@ GameObject:
   m_Component:
   - 4: {fileID: 400094}
   - 111: {fileID: 11100000}
+<<<<<<< HEAD
   - 114: {fileID: 114000010571928154}
+=======
+  - 114: {fileID: 114000011327575330}
+>>>>>>> 501dcfa86cfa6fdebafb6de0f259d19bad303f69
   m_Layer: 0
   m_Name: Necromancer
   m_TagString: Untagged
@@ -1443,7 +1447,7 @@ Animation:
   m_GameObject: {fileID: 100094}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 013ee0a8b56bacd44b928eab033163af, type: 3}
+  m_Animation: {fileID: 7400002, guid: 013ee0a8b56bacd44b928eab033163af, type: 3}
   m_Animations:
   - {fileID: 7400000, guid: 013ee0a8b56bacd44b928eab033163af, type: 3}
   - {fileID: 7400002, guid: 013ee0a8b56bacd44b928eab033163af, type: 3}
@@ -1554,7 +1558,11 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100094}
   m_IsPrefabParent: 1
+<<<<<<< HEAD
 --- !u!114 &114000010571928154
+=======
+--- !u!114 &114000011327575330
+>>>>>>> 501dcfa86cfa6fdebafb6de0f259d19bad303f69
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
