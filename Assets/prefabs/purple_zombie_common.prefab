@@ -608,6 +608,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012897485774}
   - 95: {fileID: 95000012146597510}
+  - 114: {fileID: 114000014197179700}
   m_Layer: 0
   m_Name: purple_zombie_common
   m_TagString: Untagged
@@ -1851,7 +1852,7 @@ Animator:
   m_GameObject: {fileID: 1000012812547512}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 15da26ef70ce2fa41a31923720b366ae, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0b87b800d4547f044b84ed13f05da9f7, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1859,6 +1860,35 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114000014197179700
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012812547512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f685a25083417604590f9afdb346f66f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionsPerTurn: 2
+  remainingActions: 0
+  stepLength: 5
+  precision: 50
+  critChance: 10
+  health: 4
+  armour: 0
+  mana: 0
+  element: 0
+  teamID: 1
+  posX: 0
+  posZ: 0
+  attackRange: 1
+  attackArea: 1
+  attackDamage: 1
+  attackActions: 2
+  attackElem: 0
+  anim: {fileID: 0}
 --- !u!137 &137000010607149428
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

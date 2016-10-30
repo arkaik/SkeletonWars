@@ -675,6 +675,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012982203804}
   - 95: {fileID: 95000011657447268}
+  - 114: {fileID: 114000010475467750}
   m_Layer: 0
   m_Name: cyan_sk_archer
   m_TagString: Untagged
@@ -2038,6 +2039,35 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114000010475467750
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013156676680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f685a25083417604590f9afdb346f66f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionsPerTurn: 2
+  remainingActions: 0
+  stepLength: 5
+  precision: 50
+  critChance: 10
+  health: 4
+  armour: 0
+  mana: 0
+  element: 0
+  teamID: 1
+  posX: 0
+  posZ: 0
+  attackRange: 1
+  attackArea: 1
+  attackDamage: 1
+  attackActions: 2
+  attackElem: 0
+  anim: {fileID: 0}
 --- !u!137 &137000010227798670
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

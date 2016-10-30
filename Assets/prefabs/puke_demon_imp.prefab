@@ -682,6 +682,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000011856484822}
   - 95: {fileID: 95000013181766684}
+  - 114: {fileID: 114000010335597036}
   m_Layer: 0
   m_Name: puke_demon_imp
   m_TagString: Untagged
@@ -1675,7 +1676,7 @@ Animator:
   m_GameObject: {fileID: 1000013451286646}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 4b2e016f28d343e4192214b25ab90c9e, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 10efa99af9fbf9c49ae854621856263b, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1683,6 +1684,35 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114000010335597036
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013451286646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f685a25083417604590f9afdb346f66f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionsPerTurn: 2
+  remainingActions: 0
+  stepLength: 5
+  precision: 50
+  critChance: 10
+  health: 4
+  armour: 0
+  mana: 0
+  element: 0
+  teamID: 1
+  posX: 0
+  posZ: 0
+  attackRange: 1
+  attackArea: 1
+  attackDamage: 1
+  attackActions: 2
+  attackElem: 0
+  anim: {fileID: 0}
 --- !u!137 &137000010621570834
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
