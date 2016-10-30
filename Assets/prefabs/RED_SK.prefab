@@ -325,8 +325,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012963689890}
   - 95: {fileID: 95000012581309898}
-  - 111: {fileID: 111000014174848104}
   - 114: {fileID: 114000013940748292}
+  - 111: {fileID: 111000014174848104}
   m_Layer: 0
   m_Name: RED_SK
   m_TagString: Untagged
@@ -1296,13 +1296,6 @@ MonoBehaviour:
   attackDamage: 1
   attackActions: 2
   attackElem: 0
-  attackAnim: 0
-  moveAnim: 0
-  castAnim: 0
-  deathAnim: 0
-  damageAnim: 0
-  dodgeAnim: 0
-  deathTimer: 0
   anim: {fileID: 0}
 --- !u!137 &137000010082171024
 SkinnedMeshRenderer:

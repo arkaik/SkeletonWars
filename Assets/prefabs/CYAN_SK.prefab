@@ -80,8 +80,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000013617029748}
   - 95: {fileID: 95000012152030190}
-  - 111: {fileID: 111000011293226388}
   - 114: {fileID: 114000012327830544}
+  - 111: {fileID: 111000012530624754}
   m_Layer: 0
   m_Name: CYAN_SK
   m_TagString: Untagged
@@ -1250,7 +1250,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!111 &111000011293226388
+--- !u!111 &111000012530624754
 Animation:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1261,13 +1261,13 @@ Animation:
   m_Animation: {fileID: 7400000, guid: 565d7bdee9496b847a3b218355dff0d9, type: 3}
   m_Animations:
   - {fileID: 7400000, guid: 565d7bdee9496b847a3b218355dff0d9, type: 3}
-  - {fileID: 7400000, guid: afb1efdc6cb0a7b49aae10e6113d59a0, type: 3}
   - {fileID: 7400000, guid: e33de6a369f8fd74b8f251ebba2f8c41, type: 3}
+  - {fileID: 7400000, guid: afb1efdc6cb0a7b49aae10e6113d59a0, type: 3}
   - {fileID: 7400000, guid: c40d336521144414b9c50ef0c119b9b7, type: 3}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
-  m_CullingType: 1
+  m_CullingType: 0
 --- !u!114 &114000012327830544
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1296,13 +1296,6 @@ MonoBehaviour:
   attackDamage: 1
   attackActions: 2
   attackElem: 0
-  attackAnim: 0
-  moveAnim: 0
-  castAnim: 0
-  deathAnim: 0
-  damageAnim: 0
-  dodgeAnim: 0
-  deathTimer: 0
   anim: {fileID: 0}
 --- !u!137 &137000012256680050
 SkinnedMeshRenderer:

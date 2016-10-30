@@ -975,6 +975,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000012252612802}
   - 95: {fileID: 95000011904137524}
+  - 114: {fileID: 114000013660135730}
   m_Layer: 0
   m_Name: red_sk_archer
   m_TagString: Untagged
@@ -2030,7 +2031,7 @@ Animator:
   m_GameObject: {fileID: 1000014213433796}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 9de7769f6cb5acf4b9d41c7ff0c61327, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a72e98b5ca66583468fd673575c6beec, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2038,6 +2039,35 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114000013660135730
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014213433796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f685a25083417604590f9afdb346f66f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionsPerTurn: 2
+  remainingActions: 0
+  stepLength: 5
+  precision: 50
+  critChance: 10
+  health: 4
+  armour: 0
+  mana: 0
+  element: 0
+  teamID: 1
+  posX: 0
+  posZ: 0
+  attackRange: 1
+  attackArea: 1
+  attackDamage: 1
+  attackActions: 2
+  attackElem: 0
+  anim: {fileID: 0}
 --- !u!137 &137000011471842678
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

@@ -93,6 +93,7 @@ public class UnitBehaviour : MonoBehaviour {
 			dodgeAnim = true;
 			return;
 		}
+
 		if (damage <= armour) {
 			damage = 0;
 		} else
@@ -142,7 +143,7 @@ public class UnitBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(Input.GetKeyDown("1")) {
-			receiveDamage (0);
+			attackAct ();
 		}
 
 		if (damageAnim) {
@@ -151,6 +152,9 @@ public class UnitBehaviour : MonoBehaviour {
 		} else if (dodgeAnim) {
 			anim.Play ("dodge", -1, 0f);
 			dodgeAnim = false;
+		} else if (attackAnim) {
+			anim.Play ("attack", -1, 0f);
+			attackAnim = false;
 		} else if (deathAnim) {
 			anim.Play ("death", -1, 0f);
 			deathTimer = Time.time;

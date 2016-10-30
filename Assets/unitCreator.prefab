@@ -51,7 +51,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13406b49a56381848a308c08e10f47dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lichObject: {fileID: 1000011792493290, guid: 8b79114391319fb4bb56f64adb410eff, type: 2}
+  lichNone: {fileID: 100094, guid: 5265b9564f66d6645bd47110a5a304d2, type: 2}
+  lichCyan: {fileID: 1000013466169802, guid: c1871a0da25459942ab083302ecf87d1, type: 2}
+  lichPurple: {fileID: 1000011634263304, guid: 066e441b86c1e9844bce90fc037a61c5, type: 2}
+  lichPuke: {fileID: 1000010935056404, guid: e35d5d9dcd8041540a3a65c724b35bc4, type: 2}
+  lichRed: {fileID: 1000012080980634, guid: 6da3da2220b4ee141949eaf6e7a6ed7b, type: 2}
   skeletonNone: {fileID: 137098, guid: c7e8a5bb79537a441836a1e2ea02a005, type: 2}
   skeletonCyan: {fileID: 1000010498988072, guid: 375da41ce925bd546a34e406f609940f,
     type: 2}
@@ -61,4 +65,21 @@ MonoBehaviour:
     type: 2}
   skeletonRed: {fileID: 1000011928221278, guid: c140ab0aafcd6364ca9ce9132e4f837a,
     type: 2}
+  archerNone: {fileID: 100122, guid: 9de7769f6cb5acf4b9d41c7ff0c61327, type: 3}
+  archerCyan: {fileID: 1000013156676680, guid: f547bdc1a67478c46b421145e758daa1, type: 2}
+  archerPurple: {fileID: 1000010572577722, guid: ed424050e4c59164382773c4ef981c81,
+    type: 2}
+  archerPuke: {fileID: 1000013468687218, guid: 6bcee26ec74354e45b9228b7b38866d6, type: 2}
+  archerRed: {fileID: 1000014213433796, guid: 82afc2affecf3d74f9b4615a7525e1cc, type: 2}
+  impNone: {fileID: 100100, guid: 4b2e016f28d343e4192214b25ab90c9e, type: 3}
+  impCyan: {fileID: 1000012424904804, guid: 33cc7f9d6a91e7e47b47009a309bd894, type: 2}
+  impPurple: {fileID: 1000012259794502, guid: 0e4ceab93ee12b546a904b919271a9b8, type: 2}
+  impPuke: {fileID: 1000013451286646, guid: 01c2cdf76be190242a761ab7cb9f7b25, type: 2}
+  impRed: {fileID: 1000012588674046, guid: b1e09355b0e8a504da6d810326b50c79, type: 2}
+  zombieNone: {fileID: 1000012363762458, guid: 14a251421853abe45956ea307c298aeb, type: 2}
+  zombieCyan: {fileID: 1000010633918362, guid: 191af4ea62752754a9ab9e235e5d70cd, type: 2}
+  zombiePurple: {fileID: 1000012812547512, guid: 50536844c46c32845b0c11183b328af1,
+    type: 2}
+  zombiePuke: {fileID: 1000010949094726, guid: 1f7cfb8336a0dac4ca9fe31ac3f00e2a, type: 2}
+  zombieRed: {fileID: 1000011169548798, guid: 28c9550ddadc7794aaf26ec2fc9d1e13, type: 2}
   mapSize: {x: 0, y: 0}

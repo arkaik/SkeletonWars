@@ -384,8 +384,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000011437976836}
   - 95: {fileID: 95000010435198976}
-  - 111: {fileID: 111000013460478436}
   - 114: {fileID: 114000010703646424}
+  - 111: {fileID: 111000013460478436}
   m_Layer: 0
   m_Name: PUKE_SK
   m_TagString: Untagged
@@ -1296,13 +1296,6 @@ MonoBehaviour:
   attackDamage: 1
   attackActions: 2
   attackElem: 0
-  attackAnim: 0
-  moveAnim: 0
-  castAnim: 0
-  deathAnim: 0
-  damageAnim: 0
-  dodgeAnim: 0
-  deathTimer: 0
   anim: {fileID: 0}
 --- !u!137 &137000013860254720
 SkinnedMeshRenderer:

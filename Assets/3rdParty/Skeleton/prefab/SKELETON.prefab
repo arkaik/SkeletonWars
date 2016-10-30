@@ -1227,7 +1227,7 @@ Animation:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 137098}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: 565d7bdee9496b847a3b218355dff0d9, type: 3}
   m_Animations:
@@ -1350,3 +1350,4 @@ MonoBehaviour:
   attackDamage: 1
   attackActions: 2
   attackElem: 0
+  anim: {fileID: 0}

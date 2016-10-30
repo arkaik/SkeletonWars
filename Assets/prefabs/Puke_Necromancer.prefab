@@ -171,8 +171,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000010358697140}
   - 95: {fileID: 95000010552149128}
-  - 111: {fileID: 111000010314315360}
   - 114: {fileID: 114000010295839516}
+  - 111: {fileID: 111000010314315360}
   m_Layer: 0
   m_Name: Puke_Necromancer
   m_TagString: Untagged
@@ -1520,13 +1520,6 @@ MonoBehaviour:
   attackDamage: 1
   attackActions: 2
   attackElem: 0
-  attackAnim: 0
-  moveAnim: 0
-  castAnim: 0
-  deathAnim: 0
-  damageAnim: 0
-  dodgeAnim: 0
-  deathTimer: 0
   anim: {fileID: 0}
 --- !u!137 &137000010199047148
 SkinnedMeshRenderer:
