@@ -19,6 +19,7 @@ public class InputManagerScript : MonoBehaviour {
 	private bool showActions;
 	private bool actionSelected;
 	private bool selectTargetPos;
+	private bool imageSelected;
 	private Image[] images;
 	private int actualImage;
 	private GameObject gosel;
@@ -42,6 +43,7 @@ public class InputManagerScript : MonoBehaviour {
 		gosel = null;
 		images = new Image[3];
 		actualImage = 0;
+		imageSelected = false;
 	}
 	
 	// Update is called once per frame
@@ -89,16 +91,19 @@ public class InputManagerScript : MonoBehaviour {
 					gosel = c;
 					unitSelected = true;
 					showActions = true;
+					actualImage = 0;
+					actionOption = 0;
 					GameObject canv = GameObject.Find ("Canvas");
 					images [0] = Instantiate (imageAttack);
 					images[0].transform.SetParent (canv.transform, false);
-					images [0].transform.position = new Vector3 (50, 0, 50);
+					images [0].transform.position = new Vector3 (50, 0, 100);
+					images[0].color = new Color (1f, 0f, 0f);
 					images[1] = Instantiate (imageMove);
 					images[1].transform.SetParent (canv.transform, false);
-					images [1].transform.position = new Vector3 (100, 0, 50);
+					images [1].transform.position = new Vector3 (150, 0, 100);
 					images[2] = Instantiate (imageEndTurn);
 					images[2].transform.SetParent (canv.transform, false);
-					images [2].transform.position = new Vector3 (150, 0, 50);
+					images [2].transform.position = new Vector3 (250, 0, 100);
 
 				} else {
 					changeCursorColor (Color.red);
@@ -113,7 +118,7 @@ public class InputManagerScript : MonoBehaviour {
 				changeCursorColor (Color.cyan);
 			}
 
-			if (Input.GetKeyUp (KeyCode.Space) && !selectTargetPos) {
+			if (Input.GetKeyUp (KeyCode.Space) ) {
 				Vector3 tpos = cursor.transform.position;
 				switch (actionOption) {
 				case 0:
@@ -128,13 +133,16 @@ public class InputManagerScript : MonoBehaviour {
 						changeCursorColor (Color.red);
 					}
 					break;
+				case 2:
+					tmss.changeTeam ();
+					break;
 				default:
 					break;
 				}
 
 				actionSelected = false;
 				gosel = null;
-				actionOption = -1;
+				actionOption = 0;
 				selectTargetPos = false; 
 
 
@@ -149,8 +157,10 @@ public class InputManagerScript : MonoBehaviour {
 					images[actualImage].color = new Color (1f, 0f, 0f);
 					images[previousImage].color = new Color (1f, 1f, 1f);
 					actionOption = actualImage;
+
 				}
 			}
+
 			if (Input.GetKeyUp (KeyCode.A)) {
 				int previousImage = actualImage;
 				if (actualImage > 0) {
@@ -160,8 +170,9 @@ public class InputManagerScript : MonoBehaviour {
 					actionOption = actualImage;
 				}
 			}
+				
 
-			if (Input.GetKeyUp (KeyCode.Space) && actionOption > -1) {
+			if (Input.GetKeyUp (KeyCode.Space) && actionOption != -1) {
 				selectTargetPos = false;
 				actionSelected = true;
 				unitSelected = false;

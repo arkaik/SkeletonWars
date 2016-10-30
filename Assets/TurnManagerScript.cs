@@ -108,8 +108,14 @@ public class TurnManagerScript : MonoBehaviour {
 		}
 	}
 
-	void changeTeam (int newTeam) {
+	public void changeTeam (int newTeam) {
 		actualPlayer = newTeam;
+		actualNumChars = unitList [actualPlayer].Count;
+		actualNumFinishedChars = 0;
+	}
+
+	public void changeTeam () {
+		actualPlayer = (actualPlayer+1) % playerNum;
 		actualNumChars = unitList [actualPlayer].Count;
 		actualNumFinishedChars = 0;
 	}
