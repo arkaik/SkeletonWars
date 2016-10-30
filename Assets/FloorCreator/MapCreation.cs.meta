@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2f46523907ab5e348b0cd6200ec9e6ee
+timeCreated: 1477840263
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - basic_floor: {instanceID: 0}
+  - basic_floor_father: {instanceID: 0}
+  - nhabitable_floor: {instanceID: 0}
+  - light_form: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

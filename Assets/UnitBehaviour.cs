@@ -142,9 +142,9 @@ public class UnitBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown("1")) {
+		/*if(Input.GetKeyDown("1")) {
 			attackAct ();
-		}
+		}*/
 
 		if (damageAnim) {
 			anim.Play ("hit", -1, 0f);

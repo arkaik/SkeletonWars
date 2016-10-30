@@ -9,51 +9,46 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1000013024682154}
+  m_RootGameObject: {fileID: 1000012651964030}
   m_IsPrefabParent: 1
---- !u!1 &1000013024682154
+--- !u!1 &1000012651964030
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 4000010891689096}
-  - 114: {fileID: 114000010923701130}
+  - 4: {fileID: 4000012531146598}
+  - 114: {fileID: 114000012175193480}
   m_Layer: 0
-  m_Name: InputManager
+  m_Name: TestController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4000010891689096
+--- !u!4 &4000012531146598
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013024682154}
+  m_GameObject: {fileID: 1000012651964030}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -36.653904, y: -31.953037, z: 19.381382}
+  m_LocalPosition: {x: 0.17505419, y: 2.914279, z: -5.485957}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &114000010923701130
+--- !u!114 &114000012175193480
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013024682154}
+  m_GameObject: {fileID: 1000012651964030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e30eb79cd423fd04691b1402c8e578ef, type: 3}
+  m_Script: {fileID: 11500000, guid: e35c066fc067b904e9dacd1a3a71938d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imageMove: {fileID: 114000013716489878, guid: d80ae4a7a1bea5d48b549fbf1ef3f3f5,
-    type: 2}
-  imageAttack: {fileID: 114000012902201940, guid: 8b74ce38e76531b42a1b0af65416b73a,
-    type: 2}
-  imageEndTurn: {fileID: 114000011079871108, guid: 4a32714e9b9dfa849a80b07d9381af33,
-    type: 2}
+  generator: {fileID: 1000013182272914, guid: bd3068e9944aae447a20ec5f0a4784be, type: 2}
