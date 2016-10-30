@@ -103,7 +103,7 @@ public class TurnManagerScript : MonoBehaviour {
 		int pj = (int)go.transform.position.x;
 		Vector2 diff = new Vector2(Math.Abs(pi - i), Math.Abs(pj - j));
 
-		if ((diff.x+diff.y) < ub.attackRange && ra > 0 && terrain [j, i] == 0)
+		if ((diff.x+diff.y) <= ub.attackRange && ra > 0 && terrain [j, i] == 0)
 			return true;
 		else
 			return false;
@@ -152,7 +152,7 @@ public class TurnManagerScript : MonoBehaviour {
 	void changeTeam (int newTeam) {
 		int previousTeam = actualPlayer;
 		for (int i = 0; i < unitList [previousTeam].Count; i++) {
-			GameObject go = unitList [previousTeam] [i];
+			GameObject go = unitList [previousTeam][i];
 			UnitBehaviour ub = go.GetComponent<UnitBehaviour> ();
 			ub.remainingActions = ub.actionsPerTurn;
 		}
