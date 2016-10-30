@@ -491,6 +491,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000010250036752}
+  - 95: {fileID: 95000013473596514}
   - 111: {fileID: 111000014159040658}
   - 114: {fileID: 114000011001498622}
   m_Layer: 0
@@ -1232,6 +1233,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012358289832}
   m_Mesh: {fileID: 4300000, guid: 0ba58477d7691e144a0a24c07f308a44, type: 3}
+--- !u!95 &95000013473596514
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013814300192}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5584bee98dc4bdf409cc2e5fa016c397, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!111 &111000014159040658
 Animation:
   m_ObjectHideFlags: 1
@@ -1278,6 +1296,14 @@ MonoBehaviour:
   attackDamage: 1
   attackActions: 2
   attackElem: 0
+  attackAnim: 0
+  moveAnim: 0
+  castAnim: 0
+  deathAnim: 0
+  damageAnim: 0
+  dodgeAnim: 0
+  deathTimer: 0
+  anim: {fileID: 0}
 --- !u!137 &137000011446506828
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

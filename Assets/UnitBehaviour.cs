@@ -38,10 +38,16 @@ public class UnitBehaviour : MonoBehaviour {
 	public int attackActions = 2;
 	public Elemental attackElem = Elemental.None;
 
-	public bool attackAnim = false;
-	public bool moveAnim = false;
-	public bool castAnim = false;
-	public bool deathAnim = false;
+	bool attackAnim = false;
+	bool moveAnim = false;
+	bool castAnim = false;
+	bool deathAnim = false;
+	bool damageAnim = false;
+	bool dodgeAnim = false;
+	bool idleAnim = false;
+	float deathTimer = 0;
+
+	public Animator anim;
 
 	public void SetupStats (int pX, int pZ, Team id, int actions = 2, int steps = 5,  int p = 50, int crit = 10, int pRange = 20, int critRange = 10) {
 		posX = pX;
@@ -82,17 +88,35 @@ public class UnitBehaviour : MonoBehaviour {
 		return (Random.Range (0, 100) < critChance);
 	}
 
-	void receiveDamage(int damage) {
-		if (health <= damage)
-			Die ();
-		else
+	public void receiveDamage(int damage) {
+		if (damage == 0) {
+			dodgeAnim = true;
+			return;
+		}
+		if (damage <= armour) {
+			damage = 0;
+		} else
+			damage = damage - armour;
+		
+		if (health <= damage) {
+			health = 0;
+			deathAnim = true;
+		}
+		else {
 			health -= damage;
+			damageAnim = true;
+		}
 	}
 
 	public void moveAct() {
 		remainingActions -= 1;
 		if (remainingActions < 0)
 			remainingActions = 0;
+		moveAnim = true;
+	}
+
+	public void stopMoveAct() {
+		idleAnim = true;
 	}
 
 	public int attackAct() {
@@ -104,17 +128,43 @@ public class UnitBehaviour : MonoBehaviour {
 			attack = attackDamage;
 		if (criticalHit ())
 			attack = Mathf.CeilToInt(attack * 1.5f);
+		attackAnim = true;
 		return attack;
 	}
 
 	// Use this for initialization
 	void Start () {
 		remainingActions = actionsPerTurn;
+
+		anim = GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if(Input.GetKeyDown("1")) {
+			receiveDamage (0);
+		}
+
+		if (damageAnim) {
+			anim.Play ("hit", -1, 0f);
+			damageAnim = false;
+		} else if (dodgeAnim) {
+			anim.Play ("dodge", -1, 0f);
+			dodgeAnim = false;
+		} else if (deathAnim) {
+			anim.Play ("death", -1, 0f);
+			deathTimer = Time.time;
+			deathAnim = false;
+			if(idleAnim) idleAnim = false;
+		} else if (moveAnim) {
+			anim.Play ("move", -1, 0f);
+			moveAnim = false;
+		} else if (deathTimer > 0 && Time.time - deathTimer > 1.5) {
+			Die ();
+		} else if (idleAnim) {
+			anim.Play ("idle", -1, 0f);
+			idleAnim = false;
+		}
 	}
 
 	public void Die () {

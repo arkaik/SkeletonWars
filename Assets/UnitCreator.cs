@@ -4,7 +4,11 @@ using System.Collections.Generic;
 
 public class UnitCreator : MonoBehaviour {
 
-	public GameObject lichObject;
+	public GameObject lichNone;
+	public GameObject lichCyan;
+	public GameObject lichPurple;
+	public GameObject lichPuke;
+	public GameObject lichRed;
 	public GameObject skeletonNone;
 	public GameObject skeletonCyan;
 	public GameObject skeletonPurple;
@@ -39,7 +43,13 @@ public class UnitCreator : MonoBehaviour {
 		GameObject unit = null;
 
 		if (type == UnitType.Lich) {
-			unit = Instantiate (lichObject, new Vector3(posX, 0f, posZ), Quaternion.identity) as GameObject;
+			if (team == UnitBehaviour.Team.Player)
+				unit = Instantiate (lichCyan, new Vector3(posX, 0f, posZ), Quaternion.identity) as GameObject;
+			else if (team == UnitBehaviour.Team.Enemy1)
+				unit = Instantiate (lichRed, new Vector3(posX, 0f, posZ), Quaternion.identity) as GameObject;
+			else
+				unit = Instantiate (lichNone, new Vector3(posX, 0f, posZ), Quaternion.identity) as GameObject;
+
 			unit.GetComponent<UnitBehaviour> ().SetupStats (posX, posZ, team, 3, 3, 100, 0, 0, 0);
 			unit.GetComponent<UnitBehaviour> ().SetupBaseAttack (4, 2, 3);
 
@@ -95,7 +105,7 @@ public class UnitCreator : MonoBehaviour {
 
 		createUnit (8, 12, UnitBehaviour.Team.Enemy1);
 		createUnit (10, 12, UnitBehaviour.Team.Enemy1);
-		createUnit (9, 13, UnitBehaviour.Team.Enemy1);
+		createUnit (9, 17, UnitBehaviour.Team.Enemy1);
 		createUnit (5, 17, UnitBehaviour.Team.Enemy1);
 		createUnit (4, 18, UnitBehaviour.Team.Enemy1);
 		createUnit (5, 19, UnitBehaviour.Team.Enemy1);
