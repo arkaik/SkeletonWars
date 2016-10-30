@@ -717,11 +717,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400094}
   - 111: {fileID: 11100000}
-<<<<<<< HEAD
-  - 114: {fileID: 114000010571928154}
-=======
   - 114: {fileID: 114000011327575330}
->>>>>>> 501dcfa86cfa6fdebafb6de0f259d19bad303f69
   m_Layer: 0
   m_Name: Necromancer
   m_TagString: Untagged
@@ -1558,11 +1554,7 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100094}
   m_IsPrefabParent: 1
-<<<<<<< HEAD
---- !u!114 &114000010571928154
-=======
 --- !u!114 &114000011327575330
->>>>>>> 501dcfa86cfa6fdebafb6de0f259d19bad303f69
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
