@@ -32,7 +32,7 @@ public class TurnManagerScript : MonoBehaviour {
 
 	public int actualPlayer;
 	private int actualNumChars;
-	private int actualNumFinishedChars;
+	private int actualNumFinishedChars = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -40,9 +40,8 @@ public class TurnManagerScript : MonoBehaviour {
 		//Estamos en turno
 		inTurn = true;
 		actualPlayer = 0;
-		actualNumChars = 1;//charList [actualPlayer].Count;
+		actualNumChars = unitList [actualPlayer].Count;
 		// Characters that have finished its actions
-		actualNumFinishedChars = 0;
 
 
 	}
@@ -61,9 +60,6 @@ public class TurnManagerScript : MonoBehaviour {
 		act (c);
 	}
 
-	void attack(int i, int j, params int[] altParams ) {
-	
-	}
 
 	void attackRange (int i, int j, int k, int l, params int[] altParams ) {
 	
@@ -97,9 +93,22 @@ public class TurnManagerScript : MonoBehaviour {
 		unitMap.SetValue(go, i, j);
 	}
 
+	public void attackTo(GameObject go, int i, int j) {
+		UnitBehaviour ub = go.GetComponent<UnitBehaviour> ();
+		int pi = (int)go.transform.position.z;
+		int pj = (int)go.transform.position.x;
+
+		if (unitMap [i, j] != null) {
+			GameObject t = unitMap [i, j];
+			UnitBehaviour ubt = t.GetComponent<UnitBehaviour> ();
+			int damage = ub.attackAct ();
+			ubt.receiveDamage (damage);
+		}
+	}
+
 	void changeTeam (int newTeam) {
 		actualPlayer = newTeam;
-		//actualNumChars = charList [actualPlayer].Count;
+		actualNumChars = unitList [actualPlayer].Count;
 		actualNumFinishedChars = 0;
 	}
 

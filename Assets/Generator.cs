@@ -39,7 +39,7 @@ public class Generator : MonoBehaviour {
 		//just to test
 		map [10, 10] = -1;
 		map [10, 20] = -1;
-		mScript.setMatrix (map, x, y);
+		mScript.setMatrix (map, x, y, new Vector3 (45, -45, 0), 0.8f, Color.white);
 
 		uScript.tutorialUnits ();
 		turnMan.GetComponent<TurnManagerScript> ().unitMap = uScript.getUnitMap ();
