@@ -45,7 +45,6 @@ public class UnitBehaviour : MonoBehaviour {
 	bool damageAnim = false;
 	bool dodgeAnim = false;
 	bool idleAnim = false;
-	float deathTimer = 0;
 
 	public Animator anim;
 
@@ -158,14 +157,12 @@ public class UnitBehaviour : MonoBehaviour {
 			attackAnim = false;
 		} else if (deathAnim) {
 			anim.Play ("death", -1, 0f);
-			deathTimer = Time.time;
 			deathAnim = false;
 			if(idleAnim) idleAnim = false;
+			Die (1.5f);
 		} else if (moveAnim) {
 			anim.Play ("move", -1, 0f);
 			moveAnim = false;
-		} else if (deathTimer > 0 && Time.time - deathTimer > 1.5) {
-			Die ();
 		} else if (idleAnim) {
 			anim.Play ("idle", -1, 0f);
 			idleAnim = false;
@@ -174,5 +171,9 @@ public class UnitBehaviour : MonoBehaviour {
 
 	public void Die () {
 		Destroy (gameObject);
+	}
+
+	public void Die (float t) {
+		Destroy (gameObject, t);
 	}
 }

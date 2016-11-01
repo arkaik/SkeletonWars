@@ -4,6 +4,14 @@ using UnityEngine.UI;
 
 public class InputManagerScript : MonoBehaviour {
 
+	public enum MyColor {
+		red,
+		green,
+		blue,
+		yellow,
+		cyan
+	}
+
 	private GameObject cursor;
 	public Image imageMove;
 	public Image imageAttack;
@@ -14,192 +22,273 @@ public class InputManagerScript : MonoBehaviour {
 	private float timeExpStep;
 	private float timeExpLimit;
 
-
-	private bool unitSelected;
-	private bool showActions;
-	private bool actionSelected;
-	private bool selectTargetPos;
+	private bool unitMenu;
+	private bool openMenu;
+	private bool unitActionSelected;
+	private bool generalActionSelected;
 	private bool imageSelected;
-	private Image[] images;
-	private int actualImage;
-	private GameObject gosel;
-
+	private Image[] menuOptions;
+	private int currentMenuOption;
+	private GameObject selectedGO;
 	private int actionOption;
 
-	private TurnManagerScript tmss;
+	private Color menuCursorColor = new Color (1f, 1f, 0f);
+	private MyColor currentCursorColor = MyColor.cyan;
 
-
+	private TurnManagerScript tms;
 
 	// Use this for initialization
 	void Start () {
 		cursor = GameObject.Find ("Cursor");
 		//cursor.transform.Rotate (new Vector3(90, 0, 0));
 
-		unitSelected = false;
-		showActions = false;
+		unitMenu = false;
+		openMenu = false;
 		actionOption = -1;
-		actionSelected = false;
-		selectTargetPos = false;
-		gosel = null;
-		images = new Image[3];
-		actualImage = 0;
+		unitActionSelected = false;
+		generalActionSelected = false;
+		selectedGO = null;
+		currentMenuOption = 0;
 		imageSelected = false;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
-		if (!showActions) {
-			if (Input.GetKeyDown (KeyCode.A)) {
-				cursor.transform.Translate (-1f, 0, 0);
-			}
+		if (!openMenu)
+			moveCursor ();
 
-			if (Input.GetKeyDown (KeyCode.D)) {
-				cursor.transform.Translate (1f, 0, 0);
-			}
+		else if (openMenu)
+			moveMenuCursor ();
+	}
 
-			if (Input.GetKeyDown (KeyCode.W)) {
-				cursor.transform.Translate (0, 1f, 0);
+	void moveMenuCursor() {
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			openMenu = false;
+			unitMenu = false;
+			for (int i = 0; i < menuOptions.Length; i++) {
+				DestroyObject (menuOptions [i]);
 			}
-
-			if (Input.GetKeyDown (KeyCode.S)) {
-				cursor.transform.Translate (0, -1f, 0);
-			}
-
-		} else if (showActions) {
-			if (Input.GetKey (KeyCode.Escape)) {
-				showActions = false;
-				unitSelected = false;
-				for (int i = 0; i < images.Length; i++) {
-					DestroyObject (images [i]);
-				}
-
-			}
+			actionOption = -1;
 		}
 
+		else if (Input.GetKeyDown (KeyCode.D) && menuOptions.Length > 1) {
+			int previousOption = currentMenuOption;
+			currentMenuOption = (currentMenuOption+1) % menuOptions.Length;
+			menuOptions[currentMenuOption].color = menuCursorColor;
+			menuOptions[previousOption].color = new Color (1f, 1f, 1f);
+		}
 
-		if (Input.GetKeyUp(KeyCode.Space) && !unitSelected && !actionSelected) {
-			Vector3 tilePosition = cursor.transform.position;
-			int ipos = (int)tilePosition.z;
-			int jpos = (int)tilePosition.x;
-			GameObject c = tmss.getUnitAtTile(ipos, jpos);
+		else if (Input.GetKeyDown (KeyCode.A) && menuOptions.Length > 1) {
+			int previousOption = currentMenuOption;
+			currentMenuOption -= 1;
+			if (currentMenuOption < 0)
+				currentMenuOption = menuOptions.Length - 1;
+			menuOptions[currentMenuOption].color = menuCursorColor;
+			menuOptions[previousOption].color = new Color (1f, 1f, 1f);
+		}
 
-			if (c != null) {
-				UnitBehaviour ub = c.GetComponent<UnitBehaviour> ();
-				UnitBehaviour.Team mahteam = (UnitBehaviour.Team) tmss.actualPlayer+1;
-				if (ub.teamID == mahteam && ub.remainingActions != 0) {
-					gosel = c;
-					unitSelected = true;
-					showActions = true;
-					actualImage = 0;
+		else if (Input.GetKeyDown (KeyCode.Space)) {
+			actionOption = currentMenuOption;
+
+			if (unitMenu) {
+				unitMenu = false;
+				unitActionSelected = true;
+				changeCursorColor(MyColor.green);
+			} else {
+				if (actionOption == 0) {
+					endTurn ();
 					actionOption = -1;
-					GameObject canv = GameObject.Find ("Canvas");
-					images [0] = Instantiate (imageAttack);
-					images[0].transform.SetParent (canv.transform, false);
-					images [0].transform.position = new Vector3 (50, 0, 100);
-					images[0].color = new Color (1f, 0f, 0f);
-					images[1] = Instantiate (imageMove);
-					images[1].transform.SetParent (canv.transform, false);
-					images [1].transform.position = new Vector3 (150, 0, 100);
-					images[2] = Instantiate (imageEndTurn);
-					images[2].transform.SetParent (canv.transform, false);
-					images [2].transform.position = new Vector3 (250, 0, 100);
-
+					changeCursorColor (MyColor.cyan);
 				} else {
-					changeCursorColor (Color.red);
+					generalActionSelected = true;
+					changeCursorColor(MyColor.green);
 				}
 			}
+			openMenu = false;
+			for (int i = 0; i < menuOptions.Length; i++) {
+				DestroyObject (menuOptions [i]);
+			}
+		}
+	}
 
+	void moveCursor() {
+		if (Input.GetKeyDown (KeyCode.A)) {
+			cursor.transform.Translate (-1f, 0, 0);
+			updateCursorColor ();
 		}
 
-		if (actionSelected) { 
-			if (Input.GetKeyUp (KeyCode.Escape)) {
-				actionSelected = false;
-				changeCursorColor (Color.cyan);
-			}
+		if (Input.GetKeyDown (KeyCode.D)) {
+			cursor.transform.Translate (1f, 0, 0);
+			updateCursorColor ();
+		}
 
-			if (Input.GetKeyUp (KeyCode.Space) ) {
+		if (Input.GetKeyDown (KeyCode.W)) {
+			cursor.transform.Translate (0, 1f, 0);
+			updateCursorColor ();
+		}
+
+		if (Input.GetKeyDown (KeyCode.S)) {
+			cursor.transform.Translate (0, -1f, 0);
+			updateCursorColor ();
+		}
+
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			if (unitActionSelected) {
+				unitActionSelected = false;
+				changeCursorColor (MyColor.cyan);
+			}
+		}
+
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			if (!unitMenu && !unitActionSelected && !generalActionSelected)
+				openMenuOnSelection ();
+
+			else if (unitActionSelected) {
 				Vector3 tpos = cursor.transform.position;
 				switch (actionOption) {
 				case 0:
-					if (tmss.canAttackTo (gosel, (int)tpos.z, (int)tpos.x)) {
-						tmss.attackTo (gosel, (int)tpos.z, (int)tpos.x);
-						changeCursorColor (Color.cyan);
+					if (tms.canAttackTo (selectedGO, (int)tpos.z, (int)tpos.x)) {
+						tms.attackTo (selectedGO, (int)tpos.z, (int)tpos.x);
+						changeCursorColor (MyColor.cyan);
 					} else {
-						changeCursorColor (Color.red);
+						changeCursorColor (MyColor.red);
 					}
 					break;
 				case 1:
-					if (tmss.canMoveTo (gosel, (int)tpos.z, (int)tpos.x)) {
-						tmss.moveTo (gosel, (int)tpos.z, (int)tpos.x);
-						changeCursorColor (Color.cyan);
+					if (tms.canMoveTo (selectedGO, (int)tpos.z, (int)tpos.x)) {
+						tms.moveTo (selectedGO, (int)tpos.z, (int)tpos.x);
+						changeCursorColor (MyColor.cyan);
 					} else {
-						changeCursorColor (Color.red);
+						changeCursorColor (MyColor.red);
 					}
-					break;
-				case 2:
-					tmss.changeTeam ();
 					break;
 				default:
 					break;
 				}
 
-				actionSelected = false;
-				gosel = null;
+				unitActionSelected = false;
+				selectedGO = null;
 				actionOption = -1;
-				selectTargetPos = false; 
-
 
 			}
 		}
-
-		if (unitSelected) {
-			if (Input.GetKeyUp (KeyCode.D)) {
-				int previousImage = actualImage;
-				if (actualImage < 2) {
-					actualImage += 1;
-					images[actualImage].color = new Color (1f, 0f, 0f);
-					images[previousImage].color = new Color (1f, 1f, 1f);
-					actionOption = actualImage;
-
-				}
-			}
-
-			if (Input.GetKeyUp (KeyCode.A)) {
-				int previousImage = actualImage;
-				if (actualImage > 0) {
-					actualImage -= 1;
-					images[actualImage].color = new Color (1f, 0f, 0f);
-					images[previousImage].color = new Color (1f, 1f, 1f);
-					actionOption = actualImage;
-				}
-			}
-				
-
-			if (Input.GetKeyUp (KeyCode.Space) && actionOption > -1) {
-				selectTargetPos = false;
-				actionSelected = true;
-				unitSelected = false;
-				showActions = false;
-				for (int i = 0; i < images.Length; i++) {
-					DestroyObject (images [i]);
-				}
-				changeCursorColor(new Color(1,1,0));
-			}
-
-		}
-
-
-
 	}
 
-	public void setTurnMan(TurnManagerScript tms) {
-		tmss = tms;
+	void updateCursorColor() {
+		if (!unitActionSelected && currentCursorColor != MyColor.cyan)
+			changeCursorColor (MyColor.cyan);
+		
+		else if (unitActionSelected) {
+			Vector3 pos = cursor.transform.position;
+
+			if (actionOption == 0) {
+				if (tms.canAttackTo (selectedGO, (int)pos.z, (int)pos.x))
+					changeCursorColor (MyColor.green);
+				else
+					changeCursorColor (MyColor.yellow);
+			}
+			
+			else if(actionOption == 1) {
+				if (tms.canMoveTo (selectedGO, (int)pos.z, (int)pos.x))
+					changeCursorColor (MyColor.green);
+				else
+					changeCursorColor (MyColor.yellow);
+			}
+		}
+	}
+
+	void openMenuOnSelection () {
+		Vector3 tilePosition = cursor.transform.position;
+		int x = (int)tilePosition.z;
+		int y = (int)tilePosition.x;
+		selectedGO = tms.getUnitAtTile(x, y);
+
+		if (selectedGO != null) {
+			UnitBehaviour ub = selectedGO.GetComponent<UnitBehaviour> ();
+			UnitBehaviour.Team myTeam = (UnitBehaviour.Team) tms.currentPlayer;
+			if (ub.teamID == myTeam) {
+				if (ub.remainingActions != 0)
+					loadUnitMenu ();
+				else
+					changeCursorColor (MyColor.red);
+			} else
+				changeCursorColor (MyColor.red);
+		} else {
+			loadGeneralMenu ();
+		}
+	}
+
+	void loadUnitMenu() {
+		openMenu = true;
+		menuOptions = new Image[2];
+		unitMenu = true;
+		currentMenuOption = 0;
+		actionOption = 0;
+
+		GameObject canv = GameObject.Find ("Canvas");
+
+		menuOptions [0] = Instantiate (imageAttack);
+		menuOptions[0].transform.SetParent (canv.transform, false);
+		menuOptions [0].transform.position = new Vector3 (50, 0, 100);
+		menuOptions[0].color = menuCursorColor;
+		menuOptions[1] = Instantiate (imageMove);
+		menuOptions[1].transform.SetParent (canv.transform, false);
+		menuOptions [1].transform.position = new Vector3 (150, 0, 100);
+	}
+
+	void loadGeneralMenu() {
+		openMenu = true;
+		menuOptions = new Image[1];
+		currentMenuOption = 0;
+		actionOption = 0;
+
+		GameObject canv = GameObject.Find ("Canvas");
+
+		menuOptions[0] = Instantiate (imageEndTurn);
+		menuOptions[0].transform.SetParent (canv.transform, false);
+		menuOptions [0].transform.position = new Vector3 (50, 0, 100);
+		menuOptions[0].color = menuCursorColor;
 	}
 
 	private void changeCursorColor(Color c) {
 		Light li = cursor.GetComponent<Light> () as Light;
 		li.color = c;
 	}
-		
+
+	private void changeCursorColor(MyColor cc) {
+		Color c;
+
+		switch (cc) {
+		default:
+			return;
+		case MyColor.red:
+			c = Color.red;
+			break;
+		case MyColor.green:
+			c = Color.green;
+			break;
+		case MyColor.blue:
+			c = Color.blue;
+			break;
+		case MyColor.yellow:
+			c = new Color (1, 1, 0);
+			break;
+		case MyColor.cyan:
+			c = Color.cyan;
+			break;
+		}
+		currentCursorColor = cc;
+
+		Light li = cursor.GetComponent<Light> () as Light;
+		li.color = c;
+	}
+
+	public void setTurnMan(TurnManagerScript s) {
+		tms = s;
+	}
+
+	void endTurn() {
+		tms.changeTeam ();
+	}
 }

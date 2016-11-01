@@ -168,6 +168,7 @@ public class UnitCreator : MonoBehaviour {
 		createUnit (16, 24, UnitBehaviour.Team.Enemy1);
 		createUnit (17, 26, UnitBehaviour.Team.Enemy1, UnitType.Archer);
 
+		unitsByTeam.Add (teamNone);
 		unitsByTeam.Add (teamPlayer);
 		unitsByTeam.Add (teamEnemy1);
 	}

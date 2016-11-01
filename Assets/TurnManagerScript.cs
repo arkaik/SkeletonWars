@@ -30,17 +30,17 @@ public class TurnManagerScript : MonoBehaviour {
 	public GameObject[,] unitMap;
 	public Vector2 mapSize;
 
-	public int actualPlayer;
-	private int actualNumChars;
-	private int actualNumFinishedChars = 0;
+	public int currentPlayer;
+	private int currentNumChars;
+	private int currentNumFinishedChars = 0;
 
 	// Use this for initialization
 	void Start () {
 		
 		//Estamos en turno
 		inTurn = true;
-		actualPlayer = 0;
-		actualNumChars = unitList [actualPlayer].Count;
+		currentPlayer = 0;
+		currentNumChars = unitList [currentPlayer].Count;
 		// Characters that have finished its actions
 
 
@@ -49,8 +49,8 @@ public class TurnManagerScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (actualNumFinishedChars == actualNumChars) {
-			changeTeam ((actualPlayer + 1) % playerNum);
+		if (currentNumFinishedChars == currentNumChars) {
+			changeTeam ();
 		}
 	}
 
@@ -58,11 +58,6 @@ public class TurnManagerScript : MonoBehaviour {
 	void execute(Action<GameObject> act, int i, int j) {
 		GameObject c = unitMap [i, j];
 		act (c);
-	}
-
-
-	void attackRange (int i, int j, int k, int l, params int[] altParams ) {
-	
 	}
 
 	public bool canMoveTo(GameObject go, int i, int j) {
@@ -87,7 +82,7 @@ public class TurnManagerScript : MonoBehaviour {
 		//TODO: MOVEMENT
 
 		if (ub.remainingActions == 0)
-			actualNumFinishedChars += 1;
+			currentNumFinishedChars += 1;
 		//Move the unit
 		go.transform.position = new Vector3 (j, 0, i);
 		//Update matrices
@@ -149,23 +144,26 @@ public class TurnManagerScript : MonoBehaviour {
 		}
 	}
 
-	void changeTeam (int newTeam) {
-		int previousTeam = actualPlayer;
+	public void changeTeam () {
+		int previousTeam = currentPlayer;
+		currentPlayer = (currentPlayer + 1) % (playerNum + 1);
+
 		for (int i = 0; i < unitList [previousTeam].Count; i++) {
 			GameObject go = unitList [previousTeam][i];
-			UnitBehaviour ub = go.GetComponent<UnitBehaviour> ();
-			ub.remainingActions = ub.actionsPerTurn;
+			if (go != null) {
+				UnitBehaviour ub = go.GetComponent<UnitBehaviour> ();
+				ub.remainingActions = ub.actionsPerTurn;
+			} else {
+				unitList [previousTeam].RemoveAt (i);
+				i--;
+			}
 		}
 
-		actualPlayer = newTeam;
-		actualNumChars = unitList [actualPlayer].Count;
-		actualNumFinishedChars = 0;
-	}
-
-	public void changeTeam () {
-		actualPlayer = (actualPlayer+1) % playerNum;
-		actualNumChars = unitList [actualPlayer].Count;
-		actualNumFinishedChars = 0;
+		if (currentPlayer == 0)
+			turnNum++;
+		currentNumChars = unitList [currentPlayer].Count;
+		currentNumFinishedChars = 0;
+		Debug.Log ("switched to team " + currentPlayer);
 	}
 
 	public GameObject getUnitAtTile(int i, int j) {
