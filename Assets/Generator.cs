@@ -50,11 +50,11 @@ public class Generator : MonoBehaviour {
 		tScript.mapSize = new Vector2 (20, 40);
 		tScript.terrain = map;
 		inputMan.GetComponent<InputManagerScript> ().setTurnMan(tScript);
-
+		inputMan.GetComponent<InputManagerScript> ().setMapCreat(mScript);
 	}
 
 	// Update is called once per frame
 	void Update () {
-	
+		
 	}
 }

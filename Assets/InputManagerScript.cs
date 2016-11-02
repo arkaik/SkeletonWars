@@ -36,6 +36,7 @@ public class InputManagerScript : MonoBehaviour {
 	private MyColor currentCursorColor = MyColor.cyan;
 
 	private TurnManagerScript tms;
+	private MapCreation mc;
 
 	// Use this for initialization
 	void Start () {
@@ -65,6 +66,7 @@ public class InputManagerScript : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Escape)) {
 			openMenu = false;
 			unitMenu = false;
+			//mc.removeZone ();
 			for (int i = 0; i < menuOptions.Length; i++) {
 				DestroyObject (menuOptions [i]);
 			}
@@ -94,6 +96,14 @@ public class InputManagerScript : MonoBehaviour {
 				unitMenu = false;
 				unitActionSelected = true;
 				changeCursorColor(MyColor.green);
+				Vector3 pos = cursor.transform.position;
+
+				selectedGO = tms.getUnitAtTile((int) pos.z, (int) pos.x);
+				UnitBehaviour ub = selectedGO.GetComponent<UnitBehaviour> ();
+				//if(actionOption == 0)
+					//mc.markZone ((int) pos.x, (int) pos.z, ub.attackRange);
+				//else if(actionOption == 1)
+					//mc.markZone ((int) pos.x, (int) pos.z, ub.stepLength);
 			} else {
 				if (actionOption == 0) {
 					endTurn ();
@@ -135,6 +145,7 @@ public class InputManagerScript : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Escape)) {
 			if (unitActionSelected) {
 				unitActionSelected = false;
+				//mc.removeZone ();
 			}
 			openMenu = false;
 			changeCursorColor (MyColor.cyan);
@@ -168,6 +179,7 @@ public class InputManagerScript : MonoBehaviour {
 				}
 
 				unitActionSelected = false;
+				//mc.removeZone ();
 				selectedGO = null;
 				actionOption = -1;
 
@@ -287,6 +299,10 @@ public class InputManagerScript : MonoBehaviour {
 
 	public void setTurnMan(TurnManagerScript s) {
 		tms = s;
+	}
+
+	public void setMapCreat(MapCreation s) {
+		mc = s;
 	}
 
 	void endTurn() {

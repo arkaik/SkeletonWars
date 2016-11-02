@@ -22,7 +22,7 @@ public class TestController : MonoBehaviour {
 		GameObject to = Instantiate (generator);
 		Vector3 horientacion = new Vector3 (45, -45, 0);
 		to.GetComponent<MapCreation> ().setMatrix (matrix,12,7,horientacion,0.8f,Color.white/1.2f);
-		to.GetComponent<MapCreation> ().markZone (3, 4, 2, Color.black);
+		to.GetComponent<MapCreation> ().markZone (3, 4, 2);
 		//to = Instantiate (audiocontroler);
 		//to.GetComponent<AudioManager> ().setAudioManager ("background.wav","Assets/AudioManager/Sounds");
 	}

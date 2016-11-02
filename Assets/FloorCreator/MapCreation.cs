@@ -30,6 +30,7 @@ public class MapCreation : MonoBehaviour {
 	public Texture2D[] texture_wall;	//Vector con las texturas de las paredes
 
 	void Start () {
+		delimiter_objects = new GameObject[0];
 		//Variable de instancia temporal
 		GameObject basic_instance = Instantiate(light_form,new Vector3(0,5,0), Quaternion.identity) as GameObject;
 		basic_instance.transform.Rotate (lf);
@@ -72,11 +73,12 @@ public class MapCreation : MonoBehaviour {
 	}
 	public void removeZone(){
 		delimiter_objects = GameObject.FindGameObjectsWithTag ("Delimiter");
+		Debug.Log("Delimiters: " + delimiter_objects.Length);
 		foreach (GameObject g in delimiter_objects) {
-			g.GetComponent<Remove> ().Die ();
+			if(g != null) g.GetComponent<Remove> ().Die ();
 		}
 	}
-	public void markZone(int x, int z, int area, Color color){
+	public void markZone(int x, int z, int area){
 	/**
 	 * SE TIENE QUE MEJORAR, PERO YA, DEL ROLLO, INMEDIATLY
 	 * */
