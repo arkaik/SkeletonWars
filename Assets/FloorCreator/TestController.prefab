@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012531146598}
-  - 114: {fileID: 114000012175193480}
+  - 114: {fileID: 114000011640719896}
   m_Layer: 0
   m_Name: TestController
   m_TagString: Untagged
@@ -40,7 +40,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &114000012175193480
+--- !u!114 &114000011640719896
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -48,7 +48,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000012651964030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e35c066fc067b904e9dacd1a3a71938d, type: 3}
+  m_Script: {fileID: 11500000, guid: b49506e118e61124ab82513ea6128fd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   generator: {fileID: 1000013182272914, guid: bd3068e9944aae447a20ec5f0a4784be, type: 2}
+  audiocontroler: {fileID: 1000013955497836, guid: b642fc53397026446a90e99bcfcffe87,
+    type: 2}

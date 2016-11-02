@@ -67,7 +67,7 @@ public class TurnManagerScript : MonoBehaviour {
 		int pj = (int)go.transform.position.x;
 		Vector2 diff = new Vector2(Math.Abs(pi - i), Math.Abs(pj - j));
 
-		if ((diff.x+diff.y) < ub.stepLength && ra > 0 && terrain [j, i] == 0)
+		if ((diff.x+diff.y) < ub.stepLength && ra > 0 && terrain [j, i] > 0)
 			return true;
 		else
 			return false;
@@ -78,7 +78,7 @@ public class TurnManagerScript : MonoBehaviour {
 		ub.moveAct ();
 		int pi = (int)go.transform.position.z;
 		int pj = (int)go.transform.position.x;
-		List<position> movement = getPathBFS (pi, pj, i, j);
+		//List<position> movement = getPathBFS (pi, pj, i, j);
 		//TODO: MOVEMENT
 
 		if (ub.remainingActions == 0)
@@ -98,7 +98,7 @@ public class TurnManagerScript : MonoBehaviour {
 		int pj = (int)go.transform.position.x;
 		Vector2 diff = new Vector2(Math.Abs(pi - i), Math.Abs(pj - j));
 
-		if ((diff.x+diff.y) <= ub.attackRange && ra > 0 && terrain [j, i] == 0)
+		if ((diff.x+diff.y) <= ub.attackRange && ra > 0 && terrain [j, i] > 0)
 			return true;
 		else
 			return false;
@@ -178,7 +178,7 @@ public class TurnManagerScript : MonoBehaviour {
 	};
 
 
-
+	/*
 	public List<position> getPathBFS(int x, int y, int xx, int yy) {
 		int[,] map = new int[(int)mapSize.y, (int)mapSize.x];
 		int[,] road = new int[(int)mapSize.y, (int)mapSize.x*2];
@@ -232,7 +232,7 @@ public class TurnManagerScript : MonoBehaviour {
 		}
 
 		return res;
-	}
+	}*/
 
 	/*void OnGUI(){
 		if (showActions) {

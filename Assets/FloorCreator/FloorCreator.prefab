@@ -51,13 +51,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f46523907ab5e348b0cd6200ec9e6ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basic_floor: {fileID: 1000011495271182, guid: 884954c970b51ca4d9c3f5b47d59a2c5,
+  basic_floor: {fileID: 1000011495271182, guid: a6d57f8cc0baf3545873654c3ae25492,
     type: 2}
   basic_floor_father: {fileID: 1000011495271182, guid: 76fffd23e9027e347bad342ef89456f9,
     type: 2}
-  nhabitable_floor: {fileID: 1000013422381662, guid: dd4679e61b0d25848aa2088bfeaa13e0,
+  nhabitable_floor: {fileID: 1000013422381662, guid: f3b3de213fb3e0a4d9040dc4745e6303,
     type: 2}
   light_form: {fileID: 1000010428274642, guid: 3ef491365c1c7de4b9eacacd54de259f, type: 2}
+  delimiter: {fileID: 1000012343782000, guid: 77731505be18bad49b0ff7c25a2fdea3, type: 2}
   texture_floor:
   - {fileID: 2800000, guid: 3377fca7e6042b64f99e0a68b4db477b, type: 3}
   - {fileID: 2800000, guid: 14f79ddfb22057946a2c291df17dd8b8, type: 3}

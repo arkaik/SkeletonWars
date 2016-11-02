@@ -9,11 +9,14 @@ public class CameraController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Vector3 a = new Vector3 (1, 0, 0);
 		offset = transform.position - target.transform.position;
+		offset = offset + a;
 	}
 	
 	// Update is called once per frame
 	void LateUpdate () {
-		transform.position = target.transform.position + offset;
+		transform.position = Vector3.Lerp (transform.position, target.transform.position + offset, 5.0f * Time.deltaTime);
+		//transform.position = target.transform.position + offset;
 	}
 }

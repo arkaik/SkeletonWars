@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
+
 /**
  * Este generador de mapas solo funciona para rectangulos uniformes.
  * 
@@ -20,6 +23,8 @@ public class MapCreation : MonoBehaviour {
 	public GameObject basic_floor_father;	//Ancla para los suelos
 	public GameObject nhabitable_floor;	//Objecto de zona no habitable
 	public GameObject light_form;
+	public GameObject delimiter;
+	private GameObject[] delimiter_objects;
 
 	public Texture2D[] texture_floor;	//Vector con las texturas del suelo
 	public Texture2D[] texture_wall;	//Vector con las texturas de las paredes
@@ -36,7 +41,7 @@ public class MapCreation : MonoBehaviour {
 		for(int i = 0; i < vs; i++){
 			for(int j = 0; j < hs; j++){
 				pos = matrix [i, j];
-				if (0 <= pos && pos < 5){
+				if (0 < pos && pos < 5){
 					basic_floor_instance = Instantiate (basic_floor, new Vector3 (i, -0.5f, j), Quaternion.identity) as GameObject;
 					basic_floor_instance.GetComponent<Renderer>().material.mainTexture = texture_floor [pos];
 				}
@@ -64,5 +69,94 @@ public class MapCreation : MonoBehaviour {
 		matrix = new_floor;
 		vs = x; hs = z;
 		lf = light; li = light_intensity; lc = light_color;
+	}
+	public void removeZone(){
+		delimiter_objects = GameObject.FindGameObjectsWithTag ("Delimiter");
+		foreach (GameObject g in delimiter_objects) {
+			g.GetComponent<Remove> ().Die ();
+		}
+	}
+	public void markZone(int x, int z, int area, Color color){
+	/**
+	 * SE TIENE QUE MEJORAR, PERO YA, DEL ROLLO, INMEDIATLY
+	 * */
+		if (area > 1) {
+			markPeak (x + area, z, 0);
+			markPeak (x - area, z, 2);
+			markPeak (x, z + area, 1);
+			markPeak (x, z - area, 3);
+			for (int i = 1; i < area; i++)
+				markEdge (x + area - i, z + i,0);
+			for (int i = 1; i < area; i++)
+				markEdge (x - area + i, z + i,1);
+			for (int i = 1; i < area; i++)
+				markEdge (x + area - i, z - i,3);
+			for (int i = 1; i < area; i++)
+				markEdge (x - area + i, z - i,2);
+		}
+	}
+	//norte = 0, este = 1, sur = 2, oeste = 3
+	private void markPeak(int x, int z, int cardinal){
+		GameObject t;
+		if (cardinal == 0) {
+			t = Instantiate (delimiter, new Vector3 (x + 0.5f, 0, z), Quaternion.identity) as GameObject;
+			t.transform.Rotate (-90, 0, 0);
+			t = Instantiate (delimiter, new Vector3 (x, 0, z + 0.5f), Quaternion.identity) as GameObject;
+			t.transform.Rotate (-90, 90, 0);
+			t = Instantiate (delimiter, new Vector3 (x, 0, z - 0.5f), Quaternion.identity) as GameObject;
+			t.transform.Rotate (-90, 90, 0);
+		}
+		else if (cardinal == 1) {
+			t = Instantiate (delimiter, new Vector3 (x, 0, z + 0.5f), Quaternion.identity) as GameObject;
+			t.transform.Rotate (-90, 90, 0);
+			t = Instantiate (delimiter, new Vector3 (x + 0.5f, 0, z), Quaternion.identity) as GameObject;
+			t.transform.Rotate (-90, 0, 0);
+			t = Instantiate (delimiter, new Vector3 (x - 0.5f, 0, z), Quaternion.identity) as GameObject;
+			t.transform.Rotate (-90, 0, 0);
+		}
+		else if (cardinal == 2) {
+			t = Instantiate (delimiter, new Vector3 (x - 0.5f, 0, z), Quaternion.identity) as GameObject;
+			t.transform.Rotate (-90, 0, 0);
+			t = Instantiate (delimiter, new Vector3 (x, 0, z + 0.5f), Quaternion.identity) as GameObject;
+			t.transform.Rotate (-90, 90, 0);
+			t = Instantiate (delimiter, new Vector3 (x, 0, z - 0.5f), Quaternion.identity) as GameObject;
+			t.transform.Rotate (-90, 90, 0);
+		}
+		else if (cardinal == 3) {
+			t = Instantiate (delimiter, new Vector3 (x, 0, z - 0.5f), Quaternion.identity) as GameObject;
+			t.transform.Rotate (-90, 90, 0);
+			t = Instantiate (delimiter, new Vector3 (x + 0.5f, 0, z), Quaternion.identity) as GameObject;
+			t.transform.Rotate (-90, 0, 0);
+			t = Instantiate (delimiter, new Vector3 (x - 0.5f, 0, z), Quaternion.identity) as GameObject;
+			t.transform.Rotate (-90, 0, 0);
+		}
+	}
+	//noreste = 0, sureste = 1, suroeste = 2, noroeste = 3
+	private void markEdge(int x, int z, int cardinal){
+		GameObject t;
+		if (cardinal == 0) {
+			t = Instantiate (delimiter, new Vector3 (x + 0.5f, 0, z), Quaternion.identity) as GameObject;
+			t.transform.Rotate (-90, 0, 0);
+			t = Instantiate (delimiter, new Vector3 (x, 0, z + 0.5f), Quaternion.identity) as GameObject;
+			t.transform.Rotate (-90, 90, 0);
+		} 
+		else if (cardinal == 1) {
+			t = Instantiate (delimiter, new Vector3 (x - 0.5f, 0, z), Quaternion.identity) as GameObject;
+			t.transform.Rotate (-90, 0, 0);
+			t = Instantiate (delimiter, new Vector3 (x, 0, z + 0.5f), Quaternion.identity) as GameObject;
+			t.transform.Rotate (-90, 90, 0);
+		}
+		else if (cardinal == 2) {
+			t = Instantiate (delimiter, new Vector3 (x - 0.5f, 0, z), Quaternion.identity) as GameObject;
+			t.transform.Rotate (-90, 0, 0);
+			t = Instantiate (delimiter, new Vector3 (x, 0, z - 0.5f), Quaternion.identity) as GameObject;
+			t.transform.Rotate (-90, 90, 0);
+		}
+		else if (cardinal == 3) {
+			t = Instantiate (delimiter, new Vector3 (x + 0.5f, 0, z), Quaternion.identity) as GameObject;
+			t.transform.Rotate (-90, 0, 0);
+			t = Instantiate (delimiter, new Vector3 (x, 0, z - 0.5f), Quaternion.identity) as GameObject;
+			t.transform.Rotate (-90, 90, 0);
+		}
 	}
 }

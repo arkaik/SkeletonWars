@@ -55,11 +55,10 @@ public class InputManagerScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (!openMenu)
-			moveCursor ();
-
-		else if (openMenu)
+		if (openMenu)
 			moveMenuCursor ();
+		else
+			moveCursor ();
 	}
 
 	void moveMenuCursor() {
@@ -136,8 +135,9 @@ public class InputManagerScript : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Escape)) {
 			if (unitActionSelected) {
 				unitActionSelected = false;
-				changeCursorColor (MyColor.cyan);
 			}
+			openMenu = false;
+			changeCursorColor (MyColor.cyan);
 		}
 
 		if (Input.GetKeyDown (KeyCode.Space)) {
@@ -207,6 +207,7 @@ public class InputManagerScript : MonoBehaviour {
 		if (selectedGO != null) {
 			UnitBehaviour ub = selectedGO.GetComponent<UnitBehaviour> ();
 			UnitBehaviour.Team myTeam = (UnitBehaviour.Team) tms.currentPlayer;
+
 			if (ub.teamID == myTeam) {
 				if (ub.remainingActions != 0)
 					loadUnitMenu ();

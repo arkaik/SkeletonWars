@@ -34,9 +34,9 @@ public class Generator : MonoBehaviour {
 		for (int i = 0; i < x; ++i) {
 			for (int j = 0; j < y; ++j) {
 				if (i == 0 || i == x - 1 || j == 0 || j == y - 1)
-					map [i, j] = -1;
-				else
 					map [i, j] = 0;
+				else
+					map [i, j] = Random.Range(1,4);
 			}
 		}
 		//just to test
